@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ============================================================================
+  BLACK BARBER — sitio demo de barbería premium
+  Construido como plantilla de ejemplo para mostrar a negocios reales.
+
+  GUÍA RÁPIDA PARA PERSONALIZAR (léeme antes de tocar el código):
+  1. Buscá los comentarios "EDITAR:" — marcan cada dato que cambia por cliente
+     (nombre del negocio, textos, precios, horarios, teléfono, dirección, redes).
+  2. Las imágenes son fotos de stock (Unsplash) sólo para la demo. Para un
+     cliente real hay que reemplazarlas por fotos propias del local y del
+     equipo — están marcadas con "EDITAR: reemplazar por foto real".
+  3. Los colores y fuentes están centralizados como variables CSS al principio
+     de <style> (sección ":root"), así que se puede re-marcar todo el sitio
+     para otro rubro cambiando sólo esas variables.
+  4. El número de WhatsApp aparece en varios lugares — buscá "595981123456"
+     y reemplazalo por el número real del negocio en TODOS los lugares.
+============================================================================ -->
+
+<title>BLACK BARBER — Barbería premium en Asunción | Cortes, barba y afeitado clásico</title>
+<meta name="description" content="BLACK BARBER: barbería premium en Asunción. Cortes de precisión, arreglo de barba y afeitado tradicional. Reservá tu turno por WhatsApp.">
+<meta name="theme-color" content="#0e0c0a">
+
+<!-- EDITAR: actualizar estas URLs cuando el sitio tenga dominio propio -->
+<meta property="og:type" content="business.business">
+<meta property="og:title" content="BLACK BARBER — Barbería premium en Asunción">
+<meta property="og:description" content="Cortes de precisión, arreglo de barba y afeitado tradicional. Reservá tu turno por WhatsApp.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1672642150228-3fcd5826ec26?auto=format&fit=crop&w=1200&q=70">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230e0c0a'/%3E%3Ctext x='50' y='68' font-size='60' font-family='Georgia,serif' fill='%23b3894f' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Datos estructurados para SEO local — ayuda a que Google muestre horario,
+     dirección y tipo de negocio directamente en los resultados de búsqueda.
+     EDITAR: reemplazar todos los valores por los datos reales del negocio. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HairSalon",
+  "name": "BLACK BARBER",
+  "image": "https://detallesorballo.com/wp-content/uploads/2020/09/imagen-de-prueba-320x240-1.jpg",
+  "telephone": "+595981951940",
+  "priceRange": "₲₲",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Av. España 1234",
+    "addressLocality": "Asunción",
+    "addressCountry": "PY"
+  },
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "20:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "18:00" }
+  ],
+  "sameAs": ["https://www.instagram.com/larios.ang/"]
+}
+</script>
+
+<style>
+  /* =========================================================
+     TOKENS DE DISEÑO
+     Cambiar estas variables re-marca todo el sitio.
+  ========================================================= */
+  :root{
+    --ink:         #0e0c0a;   /* negro cálido base */
+    --ink-soft:    #18140f;   /* paneles sobre negro */
+    --charcoal:    #241f18;
+    --bone:        #f2ece1;   /* blanco hueso — texto principal sobre negro */
+    --bone-dim:    #cabfaf;   /* texto secundario sobre negro */
+    --bone-faint:  #8f8577;
+    --brass:       #b3894f;   /* acento — usar con moderación */
+    --brass-soft:  #d9b98a;
+    --brass-deep:  #8a6636;
+    --line:        rgba(242,236,225,.14);
+    --line-strong: rgba(242,236,225,.28);
+
+    --font-display: "Fraunces", Georgia, serif;
+    --font-body: "Archivo", -apple-system, BlinkMacSystemFont, sans-serif;
+
+    --container: 1180px;
+    --gutter: clamp(1.25rem, 5vw, 3rem);
+    --radius-sm: 3px;
+    --radius-md: 6px;
+    --ease: cubic-bezier(.22,.68,.36,1);
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *,*::before,*::after{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
+  }
+
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--bone);
+    font-family:var(--font-body);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  img{ max-width:100%; display:block; }
+  a{ color:inherit; }
+  h1,h2,h3{ font-family:var(--font-display); font-weight:500; line-height:1.08; margin:0; color:var(--bone); }
+  p{ margin:0; }
+  ul{ margin:0; padding:0; list-style:none; }
+  button{ font-family:inherit; cursor:pointer; }
+
+  .wrap{ max-width:var(--container); margin:0 auto; padding-inline:var(--gutter); }
+
+  .skip-link{
+    position:absolute; left:-999px; top:0; background:var(--brass); color:var(--ink);
+    padding:.75rem 1.25rem; z-index:200; font-weight:600;
+  }
+  .skip-link:focus{ left:1rem; top:1rem; }
+
+  :focus-visible{ outline:2px solid var(--brass-soft); outline-offset:3px; }
+
+  .eyebrow-num{ color:var(--brass); font-variant-numeric:tabular-nums; }
+
+  /* ---------- botones ---------- */
+  .btn{
+    display:inline-flex; align-items:center; gap:.6rem;
+    padding:.95rem 1.7rem;
+    border-radius:var(--radius-sm);
+    font-weight:600; font-size:.95rem;
+    text-decoration:none; border:1px solid transparent;
+    transition:transform .35s var(--ease), background-color .3s var(--ease), border-color .3s var(--ease), color .3s var(--ease);
+    white-space:nowrap;
+  }
+  .btn-primary{ background:var(--brass); color:var(--ink); }
+  .btn-primary:hover{ background:var(--brass-soft); transform:translateY(-2px); }
+  .btn-ghost{ background:transparent; color:var(--bone); border-color:var(--line-strong); }
+  .btn-ghost:hover{ border-color:var(--brass); color:var(--brass-soft); transform:translateY(-2px); }
+  .btn-block{ width:100%; justify-content:center; }
+  .btn svg{ width:1.05em; height:1.05em; flex:none; }
+
+  /* =========================================================
+     HEADER / NAV
+  ========================================================= */
+  .site-header{
+    position:fixed; inset:0 0 auto 0; z-index:100;
+    padding:1.15rem 0;
+    background:transparent;
+    transition:background-color .4s var(--ease), padding .4s var(--ease), border-color .4s var(--ease);
+    border-bottom:1px solid transparent;
+  }
+  .site-header.is-scrolled{
+    background:rgba(14,12,10,.92);
+    -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+    border-color:var(--line);
+    padding:.75rem 0;
+  }
+  .site-header .wrap{ display:flex; align-items:center; justify-content:space-between; gap:1.5rem; }
+
+  .brand{ display:flex; align-items:center; gap:.6rem; text-decoration:none; }
+  .brand-mark{ font-family:var(--font-display); font-size:1.5rem; letter-spacing:.02em; color:var(--bone); }
+  .brand-mark em{ font-style:italic; color:var(--brass); }
+
+  .primary-nav{ display:flex; align-items:center; gap:2.1rem; }
+  .primary-nav a{
+    font-size:.92rem; text-decoration:none; color:var(--bone-dim);
+    position:relative; padding-bottom:.2rem;
+    transition:color .3s var(--ease);
+  }
+  .primary-nav a::after{
+    content:""; position:absolute; left:0; right:100%; bottom:0; height:1px;
+    background:var(--brass); transition:right .35s var(--ease);
+  }
+  .primary-nav a:hover{ color:var(--bone); }
+  .primary-nav a:hover::after{ right:0; }
+
+  .header-actions{ display:flex; align-items:center; gap:1rem; }
+  .header-actions .btn-ghost{ padding:.65rem 1.2rem; font-size:.88rem; }
+  .header-actions .btn-primary{ padding:.65rem 1.3rem; font-size:.88rem; }
+
+  .nav-toggle{
+    display:none; background:none; border:1px solid var(--line-strong); border-radius:var(--radius-sm);
+    width:44px; height:40px; position:relative;
+  }
+  .nav-toggle span, .nav-toggle span::before, .nav-toggle span::after{
+    content:""; position:absolute; left:11px; right:11px; height:1px; background:var(--bone);
+    transition:transform .3s var(--ease), opacity .3s var(--ease), top .3s var(--ease);
+  }
+  .nav-toggle span{ top:19px; }
+  .nav-toggle span::before{ top:-7px; }
+  .nav-toggle span::after{ top:7px; }
+  .nav-toggle[aria-expanded="true"] span{ background:transparent; }
+  .nav-toggle[aria-expanded="true"] span::before{ top:0; transform:rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] span::after{ top:0; transform:rotate(-45deg); }
+
+  /* =========================================================
+     HERO
+  ========================================================= */
+  .hero{
+    position:relative; min-height:100svh; display:flex; align-items:flex-end;
+    padding-top:6rem; padding-bottom:clamp(3rem,8vw,6rem);
+    overflow:hidden; background:var(--ink);
+  }
+  .hero-media{ position:absolute; inset:0; z-index:0; }
+  .hero-media img{
+    width:100%; height:100%; object-fit:cover;
+    filter:grayscale(35%) contrast(1.08) brightness(.62);
+  }
+  .hero-media::after{
+    content:""; position:absolute; inset:0;
+    background:
+      linear-gradient(180deg, rgba(14,12,10,.35) 0%, rgba(14,12,10,.35) 40%, rgba(14,12,10,.96) 100%),
+      linear-gradient(90deg, rgba(14,12,10,.55) 0%, rgba(14,12,10,.05) 55%);
+  }
+  .hero .wrap{ position:relative; z-index:1; width:100%; }
+  .hero-content{ max-width:760px; }
+  .hero-kicker{
+    display:flex; align-items:center; gap:.75rem;
+    color:var(--brass-soft); font-size:.9rem; margin-bottom:1.4rem;
+  }
+  .hero-kicker .rule{ width:2.5rem; height:1px; background:var(--brass); }
+  .hero h1{
+    font-size:clamp(2.6rem, 6.4vw, 5.1rem);
+    letter-spacing:-.01em;
+    color:var(--bone);
+  }
+  .hero h1 .line{ display:block; overflow:hidden; }
+  .hero h1 .line span{ display:block; transform:translateY(105%); transition:transform .9s var(--ease); }
+  .hero.is-ready h1 .line span{ transform:translateY(0); }
+  .hero h1 .line:nth-child(1) span{ transition-delay:.05s; }
+  .hero h1 .line:nth-child(2) span{ transition-delay:.18s; }
+  .hero h1 em{ font-style:italic; color:var(--brass-soft); }
+
+  .hero-sub{
+    margin-top:1.6rem; max-width:34rem; color:var(--bone-dim); font-size:1.05rem;
+    opacity:0; transform:translateY(10px); transition:opacity .8s var(--ease) .4s, transform .8s var(--ease) .4s;
+  }
+  .hero.is-ready .hero-sub{ opacity:1; transform:translateY(0); }
+
+  .hero-actions{
+    display:flex; flex-wrap:wrap; gap:1rem; margin-top:2.4rem;
+    opacity:0; transform:translateY(10px); transition:opacity .8s var(--ease) .55s, transform .8s var(--ease) .55s;
+  }
+  .hero.is-ready .hero-actions{ opacity:1; transform:translateY(0); }
+
+  .hero-stats{
+    display:flex; gap:clamp(1.5rem,4vw,3.5rem); margin-top:3.2rem;
+    padding-top:2rem; border-top:1px solid var(--line);
+    opacity:0; transition:opacity .8s var(--ease) .7s;
+  }
+  .hero.is-ready .hero-stats{ opacity:1; }
+  .hero-stat b{ display:block; font-family:var(--font-display); font-size:1.9rem; color:var(--brass-soft); }
+  .hero-stat span{ font-size:.82rem; color:var(--bone-faint); }
+
+  /* =========================================================
+     SECCIONES — estructura general
+  ========================================================= */
+  section{ padding:clamp(4.5rem,10vw,7.5rem) 0; }
+  .section-head{ max-width:640px; margin-bottom:clamp(2.5rem,6vw,4rem); }
+  .section-head h2{ font-size:clamp(2rem,4.4vw,3.1rem); }
+  .section-head p{ margin-top:1rem; color:var(--bone-dim); font-size:1.05rem; }
+  .on-light{ background:var(--bone); color:var(--ink); }
+  .on-light h2, .on-light h3{ color:var(--ink); }
+  .on-light .section-head p{ color:#57503f; }
+
+  .reveal{ opacity:0; transform:translateY(18px); transition:opacity .7s var(--ease), transform .7s var(--ease); }
+  .reveal.is-visible{ opacity:1; transform:translateY(0); }
+
+  /* =========================================================
+     SOBRE NOSOTROS
+  ========================================================= */
+  .about{ background:var(--ink-soft); }
+  .about-grid{
+    display:grid; grid-template-columns:.95fr 1.05fr; gap:clamp(2rem,5vw,5rem); align-items:center;
+  }
+  .about-media{ position:relative; }
+  .about-media img{ width:100%; height:560px; object-fit:cover; filter:grayscale(20%); }
+  .about-fact{
+    position:absolute; left:-1.5rem; bottom:-1.5rem;
+    background:var(--brass); color:var(--ink);
+    padding:1.4rem 1.7rem; max-width:13rem;
+  }
+  .about-fact b{ display:block; font-family:var(--font-display); font-size:2.1rem; line-height:1; }
+  .about-fact span{ font-size:.82rem; }
+  .about-copy .section-head{ margin-bottom:1.6rem; }
+  .about-copy p + p{ margin-top:1.1rem; color:var(--bone-dim); }
+  .about-values{ display:grid; grid-template-columns:1fr 1fr; gap:1.6rem; margin-top:2.4rem; }
+  .about-values li{ padding-top:1rem; border-top:1px solid var(--line); }
+  .about-values h3{ font-size:1.05rem; margin-bottom:.4rem; color:var(--brass-soft); }
+  .about-values p{ font-size:.92rem; color:var(--bone-faint); }
+
+  /* =========================================================
+     SERVICIOS Y PRECIOS — estilo "carta de barbería"
+  ========================================================= */
+  .services-layout{ display:grid; grid-template-columns:1fr; gap:0; }
+  .service-row{
+    display:grid; grid-template-columns:1.4fr auto auto; align-items:baseline;
+    gap:1.2rem; padding:1.35rem 0; border-bottom:1px solid var(--line);
+  }
+  .service-row.is-featured{ position:relative; padding-left:1.1rem; }
+  .service-row.is-featured::before{
+    content:""; position:absolute; left:0; top:0; bottom:0; width:2px; background:var(--brass);
+  }
+  .service-name{ display:flex; align-items:baseline; gap:.7rem; flex-wrap:wrap; }
+  .service-name h3{ font-size:1.18rem; font-weight:500; }
+  .service-name p{ font-size:.88rem; color:var(--bone-faint); margin-top:.25rem; flex-basis:100%; }
+  .tag-popular{
+    font-size:.68rem; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--ink); background:var(--brass-soft); padding:.2rem .5rem; border-radius:2px;
+  }
+  .service-leader{ flex:1; border-bottom:1px dotted var(--line-strong); align-self:end; margin-bottom:.4rem; min-width:1.5rem; display:none; }
+  .service-price{ font-family:var(--font-display); font-size:1.25rem; color:var(--brass-soft); white-space:nowrap; }
+  .service-price small{ font-family:var(--font-body); font-size:.7rem; color:var(--bone-faint); display:block; font-weight:400; }
+
+  .services-foot{
+    margin-top:2.6rem; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1.4rem;
+  }
+  .services-note{ font-size:.88rem; color:var(--bone-faint); max-width:26rem; }
+
+  /* =========================================================
+     GALERÍA
+  ========================================================= */
+  .gallery-grid{
+    display:grid; grid-template-columns:repeat(6,1fr); gap:.9rem;
+  }
+  .gallery-item{
+    position:relative; overflow:hidden; cursor:zoom-in; background:var(--charcoal);
+    grid-column:span 3;
+  }
+  .gallery-item:nth-child(1){ grid-column:span 4; grid-row:span 2; }
+  .gallery-item:nth-child(2){ grid-column:span 2; }
+  .gallery-item:nth-child(3){ grid-column:span 2; }
+  .gallery-item:nth-child(4){ grid-column:span 3; }
+  .gallery-item:nth-child(5){ grid-column:span 3; }
+  .gallery-item:nth-child(6){ grid-column:span 6; }
+  .gallery-item img{
+    width:100%; height:100%; min-height:220px; object-fit:cover;
+    filter:grayscale(45%);
+    transition:transform .7s var(--ease), filter .5s var(--ease);
+  }
+  .gallery-item:hover img{ transform:scale(1.06); filter:grayscale(0%); }
+  .gallery-cap{
+    position:absolute; left:0; right:0; bottom:0; padding:1rem 1.1rem;
+    background:linear-gradient(0deg, rgba(14,12,10,.85), transparent);
+    font-size:.85rem; color:var(--bone-dim);
+    opacity:0; transform:translateY(6px); transition:opacity .35s var(--ease), transform .35s var(--ease);
+  }
+  .gallery-item:hover .gallery-cap{ opacity:1; transform:translateY(0); }
+
+  /* =========================================================
+     TESTIMONIOS
+  ========================================================= */
+  .testimonials{ background:var(--ink-soft); }
+  .testi-shell{
+    max-width:760px; margin:0 auto; text-align:center; position:relative;
+  }
+  .testi-quotemark{ font-family:var(--font-display); font-size:5rem; color:var(--brass); line-height:1; opacity:.55; }
+  .testi-slide{ display:none; }
+  .testi-slide.is-active{ display:block; animation:testiFade .5s var(--ease); }
+  @keyframes testiFade{ from{ opacity:0; transform:translateY(6px);} to{ opacity:1; transform:translateY(0);} }
+  .testi-text{ font-family:var(--font-display); font-size:clamp(1.3rem,2.6vw,1.8rem); line-height:1.5; color:var(--bone); }
+  .testi-stars{ margin-top:1.4rem; color:var(--brass-soft); letter-spacing:.2rem; font-size:1rem; }
+  .testi-name{ margin-top:.9rem; font-size:.92rem; color:var(--bone-faint); }
+  .testi-name b{ color:var(--bone-dim); font-weight:600; }
+
+  .testi-nav{ display:flex; justify-content:center; gap:.6rem; margin-top:2.4rem; }
+  .testi-dot{
+    width:8px; height:8px; border-radius:50%; border:1px solid var(--line-strong); background:transparent; padding:0;
+    transition:background-color .3s var(--ease), border-color .3s var(--ease);
+  }
+  .testi-dot.is-active{ background:var(--brass); border-color:var(--brass); }
+
+  /* =========================================================
+     HORARIOS Y UBICACIÓN
+  ========================================================= */
+  .location-grid{ display:grid; grid-template-columns:.85fr 1.15fr; gap:clamp(2rem,5vw,4rem); align-items:start; }
+  .hours-list{ margin-top:1.6rem; }
+  .hours-row{
+    display:flex; justify-content:space-between; padding:.85rem 0; border-bottom:1px solid var(--line);
+    font-size:.98rem;
+  }
+  .hours-row span:first-child{ color:var(--bone-dim); }
+  .hours-row span:last-child{ font-family:var(--font-display); color:var(--bone); }
+  .hours-row.is-closed span:last-child{ color:var(--bone-faint); font-family:var(--font-body); }
+
+  .location-info{ margin-top:2rem; padding-top:1.8rem; border-top:1px solid var(--line); }
+  .location-info p{ color:var(--bone-dim); font-size:.95rem; }
+  .location-info p + p{ margin-top:.5rem; }
+  .location-info a{ color:var(--brass-soft); text-decoration:none; border-bottom:1px solid var(--brass-deep); }
+
+  .map-frame{ position:relative; width:100%; aspect-ratio:4/3.4; background:var(--ink-soft); overflow:hidden; }
+  .map-frame iframe{ width:100%; height:100%; border:0; filter:grayscale(55%) contrast(1.05) brightness(.9) invert(1); }
+
+  /* =========================================================
+     CTA FINAL
+  ========================================================= */
+  .cta-band{ position:relative; overflow:hidden; text-align:center; }
+  .cta-band .hero-media img{ filter:grayscale(55%) brightness(.4); }
+  .cta-band-inner{ position:relative; z-index:1; max-width:640px; margin:0 auto; }
+  .cta-band h2{ font-size:clamp(2rem,5vw,3.3rem); }
+  .cta-band p{ margin-top:1.1rem; color:var(--bone-dim); font-size:1.05rem; }
+  .cta-band .hero-actions{ opacity:1; transform:none; justify-content:center; margin-top:2.2rem; transition:none; }
+
+  /* =========================================================
+     FOOTER
+  ========================================================= */
+  .site-footer{ background:var(--ink-soft); padding-top:clamp(3rem,7vw,4.5rem); border-top:1px solid var(--line); }
+  .footer-top{
+    display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:2.5rem; padding-bottom:3rem;
+  }
+  .footer-brand p{ margin-top:1rem; color:var(--bone-faint); font-size:.92rem; max-width:22rem; }
+  .footer-col h3{ font-family:var(--font-body); font-size:.85rem; text-transform:uppercase; letter-spacing:.06em; color:var(--brass-soft); font-weight:600; margin-bottom:1.1rem; }
+  .footer-col ul li{ margin-bottom:.6rem; }
+  .footer-col a{ text-decoration:none; color:var(--bone-dim); font-size:.95rem; transition:color .25s var(--ease); }
+  .footer-col a:hover{ color:var(--brass-soft); }
+  .footer-social{ display:flex; gap:.8rem; margin-top:1.4rem; }
+  .footer-social a{
+    width:38px; height:38px; border:1px solid var(--line-strong); border-radius:50%;
+    display:flex; align-items:center; justify-content:center; transition:border-color .25s var(--ease), color .25s var(--ease);
+  }
+  .footer-social a:hover{ border-color:var(--brass); color:var(--brass-soft); }
+  .footer-social svg{ width:16px; height:16px; }
+  .footer-bottom{
+    border-top:1px solid var(--line); padding:1.5rem 0 2rem;
+    display:flex; flex-wrap:wrap; justify-content:space-between; gap:1rem;
+    font-size:.82rem; color:var(--bone-faint);
+  }
+  .footer-bottom a{ color:var(--bone-faint); text-decoration:underline; text-underline-offset:3px; }
+
+  /* =========================================================
+     WHATSAPP FLOTANTE
+  ========================================================= */
+  .whatsapp-fab{
+    position:fixed; right:1.4rem; bottom:1.4rem; z-index:90;
+    width:58px; height:58px; border-radius:50%;
+    background:var(--brass); color:var(--ink);
+    display:flex; align-items:center; justify-content:center;
+    text-decoration:none; box-shadow:0 8px 24px rgba(0,0,0,.45);
+    transition:transform .3s var(--ease), background-color .3s var(--ease);
+  }
+  .whatsapp-fab:hover{ transform:translateY(-3px); background:var(--brass-soft); }
+  .whatsapp-fab svg{ width:26px; height:26px; }
+  .whatsapp-fab::before{
+    content:""; position:absolute; inset:0; border-radius:50%;
+    border:1px solid var(--brass); animation:pulseRing 2.6s ease-out infinite;
+  }
+  @keyframes pulseRing{
+    0%{ transform:scale(1); opacity:.6; }
+    100%{ transform:scale(1.55); opacity:0; }
+  }
+  @media (prefers-reduced-motion: reduce){ .whatsapp-fab::before{ animation:none; } }
+
+  /* =========================================================
+     LIGHTBOX GALERÍA
+  ========================================================= */
+  .lightbox{
+    position:fixed; inset:0; z-index:200; background:rgba(14,12,10,.94);
+    display:flex; align-items:center; justify-content:center; padding:2rem;
+    opacity:0; visibility:hidden; transition:opacity .3s var(--ease);
+  }
+  .lightbox.is-open{ opacity:1; visibility:visible; }
+  .lightbox img{ max-width:90vw; max-height:85vh; object-fit:contain; }
+  .lightbox-close{
+    position:absolute; top:1.5rem; right:1.5rem; width:44px; height:44px;
+    border:1px solid var(--line-strong); border-radius:50%; background:transparent; color:var(--bone);
+    font-size:1.4rem; line-height:1;
+  }
+
+  /* =========================================================
+     RESPONSIVE
+  ========================================================= */
+  @media (max-width: 980px){
+    .about-grid, .location-grid{ grid-template-columns:1fr; }
+    .about-media img{ height:400px; }
+    .footer-top{ grid-template-columns:1fr 1fr; }
+  }
+
+  @media (max-width: 860px){
+    .primary-nav{
+      position:fixed; inset:0 0 0 auto; width:min(78vw,340px);
+      background:var(--ink-soft); border-left:1px solid var(--line);
+      flex-direction:column; align-items:flex-start; justify-content:flex-start;
+      padding:6.5rem 2rem 2rem; gap:1.6rem;
+      transform:translateX(100%); transition:transform .45s var(--ease);
+    }
+    .primary-nav.is-open{ transform:translateX(0); }
+    .primary-nav a{ font-size:1.15rem; }
+    .header-actions .btn-ghost{ display:none; }
+    .nav-toggle{ display:block; }
+    .service-row{ grid-template-columns:1fr auto; }
+    .footer-top{ grid-template-columns:1fr; gap:2.2rem; }
+  }
+
+  @media (max-width: 640px){
+    .gallery-grid{ grid-template-columns:repeat(2,1fr); }
+    .gallery-item, .gallery-item:nth-child(1), .gallery-item:nth-child(6){ grid-column:span 2; grid-row:auto; }
+    .gallery-item img{ min-height:180px; }
+    .about-values{ grid-template-columns:1fr; }
+    .about-fact{ position:static; margin-top:-1px; max-width:none; display:flex; align-items:center; gap:.8rem; }
+    .about-fact b{ font-size:1.6rem; }
+    .hero-stats{ gap:1.6rem; flex-wrap:wrap; }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+<header class="site-header" id="siteHeader">
+  <div class="wrap">
+    <a class="brand" href="#inicio">
+      <span class="brand-mark">BLACK <em>BARBER</em></span>
+    </a>
+
+    <nav class="primary-nav" id="primaryNav" aria-label="Navegación principal">
+      <a href="#sobre-nosotros">Sobre nosotros</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#galeria">Galería</a>
+      <a href="#testimonios">Testimonios</a>
+      <a href="#ubicacion">Ubicación</a>
+    </nav>
+
+    <div class="header-actions">
+      <!-- EDITAR: número de WhatsApp real -->
+      <a class="btn btn-ghost" href="https://wa.me/595981951940?text=Hola%20BLACK%20BARBER%2C%20quiero%20reservar%20un%20turno" target="_blank" rel="noopener">
+        WhatsApp
+      </a>
+      <a class="btn btn-primary" href="#servicios">Reservar turno</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="primaryNav">
+        <span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="contenido">
+
+  <!-- =========================================================
+       HERO
+       EDITAR: título, subtítulo, foto de fondo, cifras destacadas
+  ========================================================= -->
+  <section class="hero" id="inicio">
+    <div class="hero-media" aria-hidden="true">
+      <!-- EDITAR: reemplazar por foto real del local o de un corte terminado -->
+      <img src="https://biblus.accasoftware.com/es/wp-content/uploads/sites/3/2024/12/proyecto-tienda-peluqueria_3-1.jpg.webp">
+    </div>
+    <div class="wrap">
+      <div class="hero-content">
+        <p class="hero-kicker"><span class="rule"></span> Barbería en Asunción desde 2019</p>
+        <h1>
+          <span class="line"><span>Cada corte</span></span>
+          <span class="line"><span>es un <em>oficio</em>.</span></span>
+        </h1>
+        <p class="hero-sub">En BLACK BARBER combinamos técnica clásica de barbería con un ojo moderno para el detalle. Sin apuros, sin plantillas: cada cliente sale con un corte pensado para su cara y su estilo.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://wa.me/595981951940?text=Hola%20BLACK%20BARBER%2C%20quiero%20reservar%20un%20turno" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.48 1.34 5L2 22l5.2-1.36a9.94 9.94 0 0 0 4.84 1.23h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2zm0 18.2h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.1.81.83-3.02-.2-.31a8.22 8.22 0 0 1-1.26-4.4c0-4.55 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.41a8.19 8.19 0 0 1 2.41 5.83c0 4.55-3.7 8.24-8.27 8.24zm4.52-6.17c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.44.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.89 2.41 1.02 2.58.12.17 1.75 2.68 4.25 3.75.59.26 1.06.41 1.42.53.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.16-.48-.28z"/></svg>
+            Reservar por WhatsApp
+          </a>
+          <a class="btn btn-ghost" href="#servicios">Ver servicios y precios</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><b>+6</b><span>años de trayectoria</span></div>
+          <div class="hero-stat"><b>+4.000</b><span>cortes realizados</span></div>
+          <div class="hero-stat"><b>4.9/5</b><span>en reseñas de clientes</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       SOBRE NOSOTROS
+       EDITAR: historia real del negocio, foto del equipo/local
+  ========================================================= -->
+  <section class="about" id="sobre-nosotros">
+    <div class="wrap about-grid">
+      <div class="about-media reveal">
+        <!-- EDITAR: reemplazar por foto real del equipo o del local -->
+        <img src="https://img.magnific.com/foto-gratis/peluquero-masculino-que-corta-pelo-cliente_23-2147839782.jpg?semt=ais_hybrid&w=740&q=80" alt="Barbero de BLACK BARBER realizando un corte de precisión">
+        <div class="about-fact">
+          <b>2019</b>
+          <span>El año en que abrimos nuestras puertas en Asunción</span>
+        </div>
+      </div>
+      <div class="about-copy reveal">
+        <div class="section-head">
+          <h2>Un oficio que se aprende con las manos, no con atajos</h2>
+        </div>
+        <p>BLACK BARBER nació de una idea simple: un buen corte no se apura. Formamos a nuestro equipo en técnicas clásicas de barbería —tijera, navaja, degradado a mano— y las combinamos con las tendencias que piden los clientes de hoy.</p>
+        <p>Cada visita empieza con una charla sobre lo que buscás, sigue con el corte y termina con los detalles que hacen la diferencia: perfilado, toalla caliente y un repaso final frente al espejo antes de que te vayas.</p>
+        <ul class="about-values">
+          <li><h3>Técnica clásica</h3><p>Navaja, tijera y degradado trabajados a mano por barberos con formación.</p></li>
+          <li><h3>Sin apuros</h3><p>Turnos con tiempo real por cliente, no citas encimadas cada 15 minutos.</p></li>
+          <li><h3>Productos propios</h3><p>Línea de cuidado para barba y cabello pensada para el clima local.</p></li>
+          <li><h3>Ambiente pensado</h3><p>Un espacio cómodo, con música y buena onda, para que el corte sea parte del día.</p></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       SERVICIOS Y PRECIOS
+       EDITAR: nombres, descripciones y precios reales del negocio
+  ========================================================= -->
+  <section id="servicios">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Servicios y precios</h2>
+        <p>Una carta simple, sin letra chica. Todos los precios incluyen toalla caliente y repaso final.</p>
+      </div>
+
+      <div class="services-layout reveal">
+        <div class="service-row">
+          <div class="service-name">
+            <h3>Corte clásico</h3>
+            <p>Corte a tijera y máquina, lavado incluido.</p>
+          </div>
+          <div class="service-leader"></div>
+          <div class="service-price">₲ 70.000</div>
+        </div>
+
+        <div class="service-row is-featured">
+          <div class="service-name">
+            <h3>Experiencia BLACK</h3><span class="tag-popular">La más pedida</span>
+            <p>Corte + barba + afeitado a navaja + bebida de cortesía.</p>
+          </div>
+          <div class="service-leader"></div>
+          <div class="service-price">₲ 150.000</div>
+        </div>
+
+        <div class="service-row">
+          <div class="service-name">
+            <h3>Corte + barba</h3>
+            <p>Corte completo con perfilado y arreglo de barba.</p>
+          </div>
+          <div class="service-leader"></div>
+          <div class="service-price">₲ 110.000</div>
+        </div>
+
+        <div class="service-row">
+          <div class="service-name">
+            <h3>Afeitado tradicional</h3>
+            <p>Afeitado a navaja con toalla caliente y aceites.</p>
+          </div>
+          <div class="service-leader"></div>
+          <div class="service-price">₲ 60.000</div>
+        </div>
+
+        <div class="service-row">
+          <div class="service-name">
+            <h3>Diseño de barba</h3>
+            <p>Perfilado y definición de contorno.</p>
+          </div>
+          <div class="service-leader"></div>
+          <div class="service-price">₲ 50.000</div>
+        </div>
+
+        <div class="service-row">
+          <div class="service-name">
+            <h3>Coloración</h3>
+            <p>Color o platinado, según el trabajo a realizar.</p>
+          </div>
+          <div class="service-leader"></div>
+          <div class="service-price">Desde ₲ 150.000</div>
+        </div>
+
+        <div class="service-row">
+          <div class="service-name">
+            <h3>Corte niño</h3>
+            <p>Hasta 12 años, con paciencia incluida.</p>
+          </div>
+          <div class="service-leader"></div>
+          <div class="service-price">₲ 55.000</div>
+        </div>
+      </div>
+
+      <div class="services-foot">
+        <p class="services-note">¿No estás seguro qué servicio elegir? Escribinos por WhatsApp y te recomendamos el mejor corte para vos.</p>
+        <a class="btn btn-primary" href="https://wa.me/595981951940?text=Hola%2C%20quiero%20consultar%20por%20un%20servicio" target="_blank" rel="noopener">Consultar y reservar</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       GALERÍA
+       EDITAR: reemplazar TODAS las fotos por trabajos reales del negocio
+  ========================================================= -->
+  <section id="galeria">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Trabajos recientes</h2>
+        <p>Una muestra de cortes, barbas y detalles hechos en el local.</p>
+      </div>
+
+      <div class="gallery-grid reveal">
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1672642150228-3fcd5826ec26?auto=format&fit=crop&w=1000&q=70" alt="Corte de precisión en proceso">
+          <div class="gallery-cap">Corte de precisión</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1582771498000-8ad44e6c84db?auto=format&fit=crop&w=800&q=70" alt="Cliente durante un corte clásico">
+          <div class="gallery-cap">Corte clásico</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQjD6KczqQ8YpYA0d9_8KAsd5p9MSeTpR9rOIwNCVg_SyYacKOUxf1GQ&s=10" alt="Herramientas de barbería sobre mesa de madera">
+          <div class="gallery-cap">Nuestras herramientas</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSw-g-ZyFRxyN7nE5qFCSMQAMbOSeJXjthFpZUnIo6zG0LNoeeSJeqpWtwv&s=10" alt="Interior del local">
+          <div class="gallery-cap">El local</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1582771498000-8ad44e6c84db?auto=format&fit=crop&w=800&q=70&flip=h" alt="Detalle de barba perfilada">
+          <div class="gallery-cap">Barba perfilada</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1672642150228-3fcd5826ec26?auto=format&fit=crop&w=1200&q=70&flip=h" alt="Sesión de afeitado tradicional">
+          <div class="gallery-cap">Afeitado tradicional</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       TESTIMONIOS
+       EDITAR: reseñas reales de clientes (Google, Instagram, etc.)
+  ========================================================= -->
+  <section class="testimonials" id="testimonios">
+    <div class="wrap">
+      <div class="testi-shell reveal">
+        <div class="testi-quotemark" aria-hidden="true">&ldquo;</div>
+
+        <div class="testi-slide is-active">
+          <p class="testi-text">Fui varias veces a otras barberías de la zona y ninguna me dejó tan conforme. El degradado quedó perfecto y el trato fue excelente de principio a fin.</p>
+          <p class="testi-stars" aria-label="5 de 5 estrellas">★★★★★</p>
+          <p class="testi-name"><b>Diego Benítez</b> — cliente desde 2021</p>
+        </div>
+
+        <div class="testi-slide">
+          <p class="testi-text">El afeitado a navaja es otro nivel. Ambiente relajado, buena música y te vas sintiéndote realmente atendido, no apurado.</p>
+          <p class="testi-stars" aria-label="5 de 5 estrellas">★★★★★</p>
+          <p class="testi-name"><b>Marcelo Insfrán</b> — cliente frecuente</p>
+        </div>
+
+        <div class="testi-slide">
+          <p class="testi-text">Reservé por WhatsApp un jueves a la noche y me confirmaron en minutos. Puntualidad y buen ojo para recomendar el corte según la forma de cara.</p>
+          <p class="testi-stars" aria-label="5 de 5 estrellas">★★★★★</p>
+          <p class="testi-name"><b>Julio César Ortiz</b> — cliente desde 2022</p>
+        </div>
+
+        <div class="testi-nav" role="tablist" aria-label="Seleccionar testimonio">
+          <button class="testi-dot is-active" aria-label="Testimonio 1" aria-selected="true"></button>
+          <button class="testi-dot" aria-label="Testimonio 2" aria-selected="false"></button>
+          <button class="testi-dot" aria-label="Testimonio 3" aria-selected="false"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       HORARIOS Y UBICACIÓN
+       EDITAR: dirección real, horarios reales, enlace de Google Maps
+  ========================================================= -->
+  <section id="ubicacion">
+    <div class="wrap location-grid">
+      <div class="reveal">
+        <div class="section-head">
+          <h2>Horarios</h2>
+          <p>Reservá con anticipación, sobre todo los fines de semana.</p>
+        </div>
+        <div class="hours-list">
+          <div class="hours-row"><span>Lunes a viernes</span><span>9:00 – 20:00</span></div>
+          <div class="hours-row"><span>Sábados</span><span>9:00 – 18:00</span></div>
+          <div class="hours-row is-closed"><span>Domingos</span><span>Cerrado</span></div>
+        </div>
+        <div class="location-info">
+          <p><strong>Dirección:</strong> Av. España 1234, Asunción, Paraguay</p>
+          <p><strong>Teléfono / WhatsApp:</strong> <a href="https://wa.me/595981951940" target="_blank" rel="noopener">+595 981 123 456</a></p>
+          <p><a href="https://www.google.com/maps/search/?api=1&query=Av.+España+1234+Asunción+Paraguay" target="_blank" rel="noopener">Cómo llegar en Google Maps →</a></p>
+        </div>
+      </div>
+
+      <div class="map-frame reveal">
+        <!-- EDITAR: reemplazar por la ubicación real del negocio en Google Maps -->
+        <iframe
+          src="https://www.google.com/maps?q=Asunci%C3%B3n%2C%20Paraguay&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Ubicación de BLACK BARBER en el mapa">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       CTA FINAL
+  ========================================================= -->
+  <section class="cta-band">
+    <div class="hero-media" aria-hidden="true">
+      <img src="https://images.unsplash.com/photo-1781450090585-1a511b7066d9?auto=format&fit=crop&w=2000&q=70" alt="">
+    </div>
+    <div class="wrap">
+      <div class="cta-band-inner">
+        <h2>Tu próximo corte empieza con un mensaje</h2>
+        <p>Elegí el día y el horario que te queden bien — te confirmamos por WhatsApp en minutos.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://wa.me/595981951940?text=Hola%20BLACK%20BARBER%2C%20quiero%20reservar%20un%20turno" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.48 1.34 5L2 22l5.2-1.36a9.94 9.94 0 0 0 4.84 1.23h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2zm0 18.2h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.1.81.83-3.02-.2-.31a8.22 8.22 0 0 1-1.26-4.4c0-4.55 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.41a8.19 8.19 0 0 1 2.41 5.83c0 4.55-3.7 8.24-8.27 8.24zm4.52-6.17c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.44.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.89 2.41 1.02 2.58.12.17 1.75 2.68 4.25 3.75.59.26 1.06.41 1.42.53.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.16-.48-.28z"/></svg>
+            Escribir por WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- =========================================================
+     FOOTER
+     EDITAR: redes sociales reales, enlaces y datos de contacto
+========================================================= -->
+<footer class="site-footer">
+  <div class="wrap footer-top">
+    <div class="footer-brand">
+      <span class="brand-mark">BLACK <em>BARBER</em></span>
+      <p>Barbería premium en Asunción. Cortes de precisión, barba y afeitado clásico, con turno por WhatsApp.</p>
+      <div class="footer-social" aria-label="Redes sociales">
+        <!-- EDITAR: enlaces reales de Instagram, TikTok y Facebook -->
+        <a href="https://www.instagram.com/larios.ang/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@ang.larios?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener" aria-label="TikTok">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 3c.3 1.9 1.6 3.4 3.4 3.9v2.4c-1.3 0-2.5-.4-3.4-1.1v6.2a5 5 0 1 1-4.3-4.95v2.5a2.5 2.5 0 1 0 1.8 2.4V3h2.5z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=100088973084744" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.5H16l.4-3H13.5V8.4c0-.87.24-1.46 1.5-1.46H16.5V4.35C16.2 4.31 15.2 4.22 14 4.22c-2.4 0-4 1.46-4 4.15V10.5H7.5v3H10V21h3.5z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <nav class="footer-col" aria-label="Navegación del footer">
+      <h3>Explorar</h3>
+      <ul>
+        <li><a href="#sobre-nosotros">Sobre nosotros</a></li>
+        <li><a href="#servicios">Servicios y precios</a></li>
+        <li><a href="#galeria">Galería</a></li>
+        <li><a href="#testimonios">Testimonios</a></li>
+      </ul>
+    </nav>
+
+    <div class="footer-col">
+      <h3>Contacto</h3>
+      <ul>
+        <li><a href="https://wa.me/595981951940" target="_blank" rel="noopener">+595 981 951 940</a></li>
+        <li><a href="#ubicacion">Av. España 1234, Asunción</a></li>
+        <li><a href="#ubicacion">Lun a sáb, 9:00 – 20:00</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="wrap footer-bottom">
+    <span>© <span id="anioActual">2026</span> BLACK BARBER. Todos los derechos reservados.</span>
+    <!-- EDITAR: reemplazar por tu nombre/marca y enlace de contacto como desarrollador -->
+    <span>Sitio web diseñado y desarrollado por <a href="https://www.instagram.com/larios.ang/" target="_blank" rel="noopener">Angel Larios</a></span>
+  </div>
+</footer>
+
+<!-- WhatsApp flotante — EDITAR número real -->
+<a class="whatsapp-fab" href="https://wa.me/595981951940?text=Hola%20BLACK%20BARBER%2C%20quiero%20reservar%20un%20turno" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.48 1.34 5L2 22l5.2-1.36a9.94 9.94 0 0 0 4.84 1.23h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2zm0 18.2h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.1.81.83-3.02-.2-.31a8.22 8.22 0 0 1-1.26-4.4c0-4.55 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.41a8.19 8.19 0 0 1 2.41 5.83c0 4.55-3.7 8.24-8.27 8.24zm4.52-6.17c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.44.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.89 2.41 1.02 2.58.12.17 1.75 2.68 4.25 3.75.59.26 1.06.41 1.42.53.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.16-.48-.28z"/></svg>
+</a>
+
+<!-- Lightbox para la galería -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar imagen">&times;</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* Año dinámico en el footer */
+  var yearEl = document.getElementById('anioActual');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  /* Header: fondo sólido al hacer scroll */
+  var header = document.getElementById('siteHeader');
+  function onScroll(){
+    if (window.scrollY > 40) header.classList.add('is-scrolled');
+    else header.classList.remove('is-scrolled');
+  }
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive:true });
+
+  /* Menú móvil */
+  var nav = document.getElementById('primaryNav');
+  var toggle = document.getElementById('navToggle');
+  toggle.addEventListener('click', function(){
+    var isOpen = nav.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    toggle.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
+  });
+  nav.querySelectorAll('a').forEach(function(link){
+    link.addEventListener('click', function(){
+      nav.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  /* Hero: activa la animación de entrada una vez cargado */
+  var hero = document.querySelector('.hero');
+  requestAnimationFrame(function(){
+    setTimeout(function(){ hero.classList.add('is-ready'); }, 60);
+  });
+
+  /* Revelado sutil de secciones al hacer scroll */
+  var revealTargets = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold:.15 });
+    revealTargets.forEach(function(el){ io.observe(el); });
+  } else {
+    revealTargets.forEach(function(el){ el.classList.add('is-visible'); });
+  }
+
+  /* Testimonios: carrusel simple */
+  var slides = document.querySelectorAll('.testi-slide');
+  var dots = document.querySelectorAll('.testi-dot');
+  var current = 0, timer;
+
+  function showSlide(i){
+    slides[current].classList.remove('is-active');
+    dots[current].classList.remove('is-active');
+    dots[current].setAttribute('aria-selected', 'false');
+    current = (i + slides.length) % slides.length;
+    slides[current].classList.add('is-active');
+    dots[current].classList.add('is-active');
+    dots[current].setAttribute('aria-selected', 'true');
+  }
+  dots.forEach(function(dot, i){
+    dot.addEventListener('click', function(){ showSlide(i); resetTimer(); });
+  });
+  function resetTimer(){
+    clearInterval(timer);
+    timer = setInterval(function(){ showSlide(current + 1); }, 6000);
+  }
+  if (slides.length) resetTimer();
+
+  /* Galería: lightbox */
+  var lightbox = document.getElementById('lightbox');
+  var lightboxImg = document.getElementById('lightboxImg');
+  var lightboxClose = document.getElementById('lightboxClose');
+
+  document.querySelectorAll('.gallery-item img').forEach(function(img){
+    img.addEventListener('click', function(){
+      lightboxImg.src = img.src.replace(/w=\d+/, 'w=1600');
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add('is-open');
+    });
+  });
+  function closeLightbox(){ lightbox.classList.remove('is-open'); lightboxImg.src = ''; }
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', function(e){ if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeLightbox(); });
+
+})();
+</script>
+
+</body>
+</html>
