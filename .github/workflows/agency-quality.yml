@@ -1,7 +1,5 @@
 name: Agencia / Calidad BETA
 on:
-  push:
-    branches: [ci/agency-quality-gate]
   pull_request:
     branches: [main]
   workflow_dispatch:
