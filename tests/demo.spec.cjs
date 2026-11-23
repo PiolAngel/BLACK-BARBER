@@ -100,7 +100,7 @@ test('no hay scroll horizontal en tamaños móviles y tablet, con menú cerrado 
       expect(metrics.document, JSON.stringify({width,state,metrics})).toBeLessThanOrEqual(metrics.viewport + 1);
     };
     await inspect('closed');
-    if (width <= 860) {
+    if (width <= 1023) {
       await page.locator('#navToggle').click();
       await inspect('open');
       await page.locator('#navToggle').click();
