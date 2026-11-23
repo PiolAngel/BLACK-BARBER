@@ -65,7 +65,7 @@ test('Open Graph y Twitter apuntan al logo público, no a la galería', async ({
 });
 
 test('no hay scroll horizontal en tamaños móviles y tablet, con menú cerrado y abierto', async ({ page }) => {
-  for (const width of [320, 360, 390, 430, 640, 768, 820, 860, 1024]) {
+  for (const width of [320, 360, 390, 430, 520, 521, 640, 768, 820, 860, 861, 900, 980, 1024]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto('/');
     const inspect = async (state) => {
