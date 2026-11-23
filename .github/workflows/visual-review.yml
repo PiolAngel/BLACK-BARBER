@@ -24,14 +24,14 @@ jobs:
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: black-barber-visual-22032ca1
-          path: .visual-review/
+          path: visual-review/
           if-no-files-found: error
           retention-days: 30
       - name: Crear copias revisables de capturas en rama de PR
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add .visual-review/
+          git add visual-review/
           if ! git diff --cached --quiet; then
             git commit -m 'test: provide temporary screenshots for visual audit'
             git push origin HEAD:ci/agency-quality-gate
