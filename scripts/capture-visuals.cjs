@@ -42,6 +42,8 @@ const { once } = require('node:events');
       if (viewport.width <= 1023) {
         await page.locator('#navToggle').click();
         await page.waitForTimeout(600);
+        const closeGlyph = await page.locator('#navToggle').evaluate(el => getComputedStyle(el, '::after').content);
+        if (!closeGlyph.includes('×')) throw Error(viewport.name + ' menu close glyph is not visible by CSS');
         await page.screenshot({path: 'visual-review/' + viewport.name + '-menu-abierto.jpg', fullPage: false, type: 'jpeg', quality: 78, animations: 'disabled'});
         const opened = await page.locator('#navToggle').getAttribute('aria-expanded');
         if (opened !== 'true') throw Error('menu failed on ' + viewport.name);
