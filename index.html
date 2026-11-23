@@ -126,7 +126,7 @@
      HEADER / NAV
   ========================================================= */
   .demo-banner{position:relative;z-index:120;background:#b3894f;color:#0e0c0a;text-align:center;padding:.48rem 1rem;font-size:.82rem;line-height:1.45;}
-  .demo-banner strong{letter-spacing:.08em;}
+  .demo-banner strong{letter-spacing:.1em;}
   .site-header{
     position:sticky; top:0; z-index:100; background:var(--ink-soft);
     padding:1.15rem 0;
@@ -451,6 +451,20 @@
   .demo-contact{background:var(--ink-soft);border-block:1px solid var(--line);}
   .demo-contact .wrap{max-width:850px;text-align:center;}
   .demo-contact p{color:var(--bone-dim);margin:1.3rem auto 0;max-width:600px;}
+  .demo-form{max-width:560px;margin:2rem auto 0;text-align:left;border:1px solid var(--line-strong);padding:clamp(1.2rem,4vw,2rem);background:var(--ink);}
+  .demo-form label{display:block;color:var(--bone);font-weight:600;margin-bottom:.5rem;}
+  .demo-form select,.demo-form textarea{display:block;width:100%;background:var(--ink-soft);color:var(--bone);border:1px solid var(--line-strong);border-radius:3px;padding:.8rem;font:inherit;}
+  .demo-form select{margin-bottom:1.4rem;}
+  .demo-form textarea{min-height:105px;resize:vertical;}
+  .demo-form button{width:100%;justify-content:center;white-space:normal;margin-top:1.2rem;}
+  .demo-form .demo-status{margin:1rem 0 0;color:var(--brass-soft);min-height:1.5em;text-align:left;}
+  .demo-dialog{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:210;align-items:center;justify-content:center;padding:1.2rem;}
+  .demo-dialog.is-open{display:flex;}
+  .demo-dialog-inner{position:relative;max-width:460px;width:100%;background:var(--ink-soft);border:1px solid var(--brass);padding:2.5rem 1.6rem;}
+  .demo-dialog-inner h2{font-size:clamp(1.6rem,4vw,2.2rem);padding-right:2.5rem;}
+  .demo-dialog-inner p{color:var(--bone-dim);margin:1.2rem 0;}
+  .demo-dialog-close{position:absolute;right:.8rem;top:.8rem;border:1px solid var(--line-strong);background:transparent;color:var(--bone);font-size:1.6rem;width:44px;height:44px;}
+  body.demo-modal-open{overflow:hidden;}
   @media(max-width:520px){.header-actions>.btn-primary{display:none}.demo-banner{font-size:.72rem}.hero{padding-top:7rem}.whatsapp-fab{width:48px;height:48px;right:.9rem;bottom:.9rem}}
   @media(prefers-reduced-motion:reduce){.reveal,.hero-sub,.hero-actions,.hero-stats{opacity:1;transform:none}.hero h1 .line span{transform:none}}
 
@@ -497,7 +511,7 @@
 </style>
 </head>
 <body>
-<div class="demo-banner" role="note"><strong>DEMO COMERCIAL</strong> · BLACK BARBER es una barbería ficticia. Información, fotos y testimonios ilustrativos; no se toman reservas.</div>
+<div class="demo-banner" role="note"><strong>BLACK BARBER · BETA</strong> · Web de demostración, datos ficticios y consultas simuladas</div>
 
 <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
@@ -520,7 +534,7 @@
 
     <div class="header-actions">
       <!-- EDITAR: número de WhatsApp real -->
-      <a class="btn btn-ghost" href="#contacto-demo">
+      <a class="btn btn-ghost" href="#contacto-demo" data-demo-contact>
         WhatsApp
       </a>
       <a class="btn btn-primary" href="#servicios">Ver servicios</a>
@@ -544,21 +558,21 @@
     </div>
     <div class="wrap">
       <div class="hero-content">
-        <p class="hero-kicker"><span class="rule"></span> Barbería en Asunción desde 2019</p>
+        <p class="hero-kicker"><span class="rule"></span> Concepto de barbería premium en Asunción</p>
         <h1>
           <span class="line"><span>Cada corte</span></span>
           <span class="line"><span>es un <em>oficio</em>.</span></span>
         </h1>
         <p class="hero-sub">En BLACK BARBER combinamos técnica clásica de barbería con un ojo moderno para el detalle. Sin apuros, sin plantillas: cada cliente sale con un corte pensado para su cara y su estilo.</p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#contacto-demo">
+          <a class="btn btn-primary" href="#contacto-demo" data-demo-contact>
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.48 1.34 5L2 22l5.2-1.36a9.94 9.94 0 0 0 4.84 1.23h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2zm0 18.2h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.1.81.83-3.02-.2-.31a8.22 8.22 0 0 1-1.26-4.4c0-4.55 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.41a8.19 8.19 0 0 1 2.41 5.83c0 4.55-3.7 8.24-8.27 8.24zm4.52-6.17c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.44.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.89 2.41 1.02 2.58.12.17 1.75 2.68 4.25 3.75.59.26 1.06.41 1.42.53.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.16-.48-.28z"/></svg>
             Reservar por WhatsApp
           </a>
           <a class="btn btn-ghost" href="#servicios">Ver servicios y precios</a>
         </div>
         <div class="hero-stats">
-          <div class="hero-stat"><b>+6</b><span>años de trayectoria</span></div>
+          <div class="hero-stat"><b>2019</b><span>historia de ejemplo</span></div>
           <div class="hero-stat"><b>7</b><span>servicios de ejemplo</span></div>
           <div class="hero-stat"><b>100%</b><span>experiencia demostrativa</span></div>
         </div>
@@ -673,8 +687,8 @@
       </div>
 
       <div class="services-foot">
-        <p class="services-note">En una web real, este botón podría conectar con WhatsApp del negocio. Aquí solamente demuestra la navegación.</p>
-        <a class="btn btn-primary" href="#contacto-demo">Ver contacto de ejemplo</a>
+        <p class="services-note">Probá el flujo de contacto de una web real desde el simulador de WhatsApp.</p>
+        <a class="btn btn-primary" href="#contacto-demo" data-demo-contact>Consultar por WhatsApp (demo)</a>
       </div>
     </div>
   </section>
@@ -793,11 +807,11 @@
     <div class="wrap">
       <div class="cta-band-inner">
         <h2>Imaginá tu próxima web con esta experiencia</h2>
-        <p>Esta página muestra cómo podría verse una barbería premium. Las reservas están desactivadas en esta demostración.</p>
+        <p>Probá una consulta por WhatsApp como si fueras cliente. No se envían mensajes reales.</p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#contacto-demo">
+          <a class="btn btn-primary" href="#contacto-demo" data-demo-contact>
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.48 1.34 5L2 22l5.2-1.36a9.94 9.94 0 0 0 4.84 1.23h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2zm0 18.2h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.1.81.83-3.02-.2-.31a8.22 8.22 0 0 1-1.26-4.4c0-4.55 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.41a8.19 8.19 0 0 1 2.41 5.83c0 4.55-3.7 8.24-8.27 8.24zm4.52-6.17c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.44.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.89 2.41 1.02 2.58.12.17 1.75 2.68 4.25 3.75.59.26 1.06.41 1.42.53.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.16-.48-.28z"/></svg>
-            Ver demostración de contacto
+            Simular contacto WhatsApp
           </a>
         </div>
       </div>
@@ -806,7 +820,22 @@
 
 </main>
 
-<section class="demo-contact" id="contacto-demo"><div class="wrap"><h2>Así funcionaría el contacto</h2><p>En el sitio de una barbería real, los botones de reserva conectarían con su WhatsApp o agenda. Esta es una demostración: no se recogen datos ni se envían mensajes.</p><p><a class="btn btn-ghost" href="#servicios">Explorar servicios de ejemplo</a></p></div></section>
+<section class="demo-contact" id="contacto-demo" aria-labelledby="contactHeading">
+  <div class="wrap">
+    <h2 id="contactHeading">Reserva por WhatsApp</h2>
+    <p>Probá cómo funciona la consulta de un servicio. Esta BETA no envía mensajes ni guarda datos personales.</p>
+    <form class="demo-form" id="demoBooking">
+      <label for="demoService">Elegí un servicio</label>
+      <select id="demoService">
+        <option>Corte clásico</option><option>Experiencia BLACK</option><option>Corte + barba</option><option>Afeitado tradicional</option><option>Diseño de barba</option><option>Coloración</option><option>Corte niño</option>
+      </select>
+      <label for="demoMessage">Mensaje de WhatsApp (vista previa)</label>
+      <textarea id="demoMessage" readonly></textarea>
+      <button type="submit" class="btn btn-primary">Simular envío de consulta</button>
+      <p id="demoStatus" class="demo-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
 
 <!-- =========================================================
      FOOTER
@@ -819,13 +848,13 @@
       <p>Concepto ficticio de barbería premium en Asunción, creado como demostración comercial.</p>
       <div class="footer-social" aria-label="Redes sociales">
         <!-- EDITAR: enlaces reales de Instagram, TikTok y Facebook -->
-        <a href="#contacto-demo" aria-label="Instagram">
+        <a href="#redes-demo" data-demo-social="Instagram" aria-label="Simular Instagram">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
         </a>
-        <a href="#contacto-demo" aria-label="TikTok">
+        <a href="#redes-demo" data-demo-social="TikTok" aria-label="Simular TikTok">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 3c.3 1.9 1.6 3.4 3.4 3.9v2.4c-1.3 0-2.5-.4-3.4-1.1v6.2a5 5 0 1 1-4.3-4.95v2.5a2.5 2.5 0 1 0 1.8 2.4V3h2.5z"/></svg>
         </a>
-        <a href="#contacto-demo" aria-label="Facebook">
+        <a href="#redes-demo" data-demo-social="Facebook" aria-label="Simular Facebook">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.5H16l.4-3H13.5V8.4c0-.87.24-1.46 1.5-1.46H16.5V4.35C16.2 4.31 15.2 4.22 14 4.22c-2.4 0-4 1.46-4 4.15V10.5H7.5v3H10V21h3.5z"/></svg>
         </a>
       </div>
@@ -844,7 +873,7 @@
     <div class="footer-col">
       <h3>Contacto</h3>
       <ul>
-        <li><a href="#contacto-demo">Contacto ilustrativo</a></li>
+        <li><a href="#contacto-demo" data-demo-contact>Contacto ilustrativo</a></li>
         <li><a href="#ubicacion">Asunción (ubicación ficticia)</a></li>
         <li><a href="#ubicacion">Horarios de ejemplo</a></li>
       </ul>
@@ -859,10 +888,18 @@
 </footer>
 
 <!-- Acceso flotante a la sección de contacto demostrativo -->
-<a class="whatsapp-fab" href="#contacto-demo" aria-label="Ver simulación de contacto">
+<a class="whatsapp-fab" href="#contacto-demo" data-demo-contact aria-label="Ver simulación de contacto">
   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.48 1.34 5L2 22l5.2-1.36a9.94 9.94 0 0 0 4.84 1.23h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2zm0 18.2h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.1.81.83-3.02-.2-.31a8.22 8.22 0 0 1-1.26-4.4c0-4.55 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.41a8.19 8.19 0 0 1 2.41 5.83c0 4.55-3.7 8.24-8.27 8.24zm4.52-6.17c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.44.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.89 2.41 1.02 2.58.12.17 1.75 2.68 4.25 3.75.59.26 1.06.41 1.42.53.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.16-.48-.28z"/></svg>
 </a>
 
+<div class="demo-dialog" id="socialDialog" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="socialTitle">
+  <div class="demo-dialog-inner">
+    <button class="demo-dialog-close" id="socialClose" type="button" aria-label="Cerrar simulación">&times;</button>
+    <h2 id="socialTitle">Red social de ejemplo</h2>
+    <p id="socialText">En una web real este enlace abriría la red social oficial del negocio.</p>
+    <a class="btn btn-ghost" href="#galeria" id="socialGallery">Ver galería de trabajos</a>
+  </div>
+</div>
 <!-- Lightbox para la galería -->
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Imagen ampliada" aria-hidden="true">
   <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar imagen">&times;</button>
@@ -947,6 +984,55 @@
   }
   if (slides.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) resetTimer();
 
+  /* Reserva interactiva de demostración */
+  var demoService = document.getElementById('demoService');
+  var demoMessage = document.getElementById('demoMessage');
+  var demoStatus = document.getElementById('demoStatus');
+  function updateDemoMessage(){
+    demoMessage.value = 'Hola BLACK BARBER, quiero consultar disponibilidad para ' + demoService.value + '. ¿Qué horarios tienen?';
+    demoStatus.textContent = '';
+  }
+  demoService.addEventListener('change',updateDemoMessage);
+  document.getElementById('demoBooking').addEventListener('submit',function(e){
+    e.preventDefault();
+    demoStatus.textContent='Consulta simulada correctamente. No se envió ningún mensaje.';
+    demoMessage.focus();
+  });
+  updateDemoMessage();
+  document.querySelectorAll('[data-demo-contact]').forEach(function(link){
+    link.addEventListener('click',function(){
+      window.setTimeout(function(){demoService.focus({preventScroll:true});},400);
+    });
+  });
+
+  /* Simulación de enlaces a perfiles sociales, sin cuentas reales */
+  var socialDialog = document.getElementById('socialDialog');
+  var socialClose = document.getElementById('socialClose');
+  var socialTrigger = null;
+  function closeSocial(){
+    if(!socialDialog.classList.contains('is-open'))return;
+    socialDialog.classList.remove('is-open');
+    socialDialog.setAttribute('aria-hidden','true');
+    document.body.classList.remove('demo-modal-open');
+    if(socialTrigger)socialTrigger.focus();
+  }
+  document.querySelectorAll('[data-demo-social]').forEach(function(link){
+    link.addEventListener('click',function(e){
+      e.preventDefault();
+      socialTrigger=link;
+      var network=link.getAttribute('data-demo-social');
+      document.getElementById('socialTitle').textContent='BLACK BARBER en '+network;
+      document.getElementById('socialText').textContent='Vista de demostración: en una web real se abriría el perfil oficial de '+network+'. Acá podés explorar la galería sin salir de la BETA.';
+      socialDialog.classList.add('is-open');
+      socialDialog.setAttribute('aria-hidden','false');
+      document.body.classList.add('demo-modal-open');
+      socialClose.focus();
+    });
+  });
+  socialClose.addEventListener('click',closeSocial);
+  socialDialog.addEventListener('click',function(e){if(e.target===socialDialog)closeSocial();});
+  document.getElementById('socialGallery').addEventListener('click',closeSocial);
+
   /* Galería: lightbox */
   var lightbox = document.getElementById('lightbox');
   var lightboxImg = document.getElementById('lightboxImg');
@@ -969,7 +1055,7 @@
   function closeLightbox(){ lightbox.classList.remove('is-open');lightbox.setAttribute('aria-hidden','true'); lightboxImg.src = '';if(lastFocused)lastFocused.focus(); }
   lightboxClose.addEventListener('click', closeLightbox);
   lightbox.addEventListener('click', function(e){ if (e.target === lightbox) closeLightbox(); });
-  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') {closeLightbox();nav.classList.remove('is-open');toggle.setAttribute('aria-expanded','false');} if (e.key==='Tab' && lightbox.classList.contains('is-open')){e.preventDefault();lightboxClose.focus();} });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') {closeSocial();closeLightbox();nav.classList.remove('is-open');toggle.setAttribute('aria-expanded','false');} if (e.key==='Tab' && socialDialog.classList.contains('is-open')){e.preventDefault();socialClose.focus();} else if (e.key==='Tab' && lightbox.classList.contains('is-open')){e.preventDefault();lightboxClose.focus();} });
 
 })();
 </script>
