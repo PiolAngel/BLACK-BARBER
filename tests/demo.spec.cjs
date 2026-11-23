@@ -36,8 +36,30 @@ test('el menú móvil puede abrirse y cerrarse', async ({ page }) => {
   await expect(toggle).toHaveAttribute('aria-expanded', 'false');
 });
 
-test('imagen de vista previa OG existe y es PNG', async ({ request }) => {
+test('imagen de vista previa OG existe, se decodifica y mide 1200 × 630', async ({ page, request }) => {
   const response = await request.get('/black-barber-og.png');
   expect(response.status()).toBe(200);
   expect(response.headers()['content-type']).toContain('image/png');
+  await page.goto('/');
+  const dimensions = await page.evaluate(async () => {
+    const image = new Image();
+    image.src = '/black-barber-og.png';
+    await image.decode();
+    return { width: image.naturalWidth, height: image.naturalHeight };
+  });
+  expect(dimensions).toEqual({ width: 1200, height: 630 });
+});
+
+test('Open Graph y Twitter apuntan al logo público, no a la galería', async ({ page }) => {
+  await page.goto('/');
+  const ogImage = await page.locator('meta[property="og:image"]').getAttribute('content');
+  const twitterImage = await page.locator('meta[name="twitter:image"]').getAttribute('content');
+  expect(ogImage).toBe('https://black-barber-demo-five.vercel.app/black-barber-og.png');
+  expect(twitterImage).toBe(ogImage);
+  await expect(page.locator('meta[property="og:image:width"]')).toHaveAttribute('content', '1200');
+  await expect(page.locator('meta[property="og:image:height"]')).toHaveAttribute('content', '630');
+  await expect(page.locator('meta[property="og:title"]')).toHaveAttribute('content', /BLACK BARBER/);
+  await expect(page.locator('meta[property="og:description"]')).toHaveAttribute('content', /demostración/i);
+  await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute('content', 'summary_large_image');
+  await expect(page.locator('link[rel="icon"]')).toHaveAttribute('href', /^data:image\/svg\+xml/);
 });
