@@ -13,7 +13,7 @@ test('reserva demostrativa: previsualiza sin enviar mensajes', async ({ page }) 
   const select = page.locator('#demoService');
   await expect(select.locator('option')).toHaveCount(7);
   await select.selectOption({ label: 'Corte + barba' });
-  await expect(page.locator('#demoMessage')).toContainText('Corte + barba');
+  await expect(page.locator('#demoMessage')).toHaveValue(/Corte \+ barba/);
   await page.locator('#demoBooking button[type="submit"]').click();
   await expect(page.locator('#demoStatus')).not.toBeEmpty();
 });
