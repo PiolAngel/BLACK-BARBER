@@ -128,13 +128,13 @@
   .demo-banner{position:relative;z-index:120;background:#b3894f;color:#0e0c0a;text-align:center;padding:.48rem 1rem;font-size:.82rem;line-height:1.45;}
   .demo-banner strong{letter-spacing:.08em;}
   .site-header{
-    position:absolute; top:34px; left:0; right:0; z-index:100;
+    position:sticky; top:0; z-index:100; background:var(--ink-soft);
     padding:1.15rem 0;
     background:transparent;
     transition:background-color .4s var(--ease), padding .4s var(--ease), border-color .4s var(--ease);
     border-bottom:1px solid transparent;
   }
-  .site-header.is-scrolled{position:fixed;top:0;
+  .site-header.is-scrolled{
     background:rgba(14,12,10,.92);
     -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
     border-color:var(--line);
@@ -445,7 +445,9 @@
   }
   .lightbox.is-open{ opacity:1; visibility:visible; }
   .lightbox img{ max-width:90vw; max-height:85vh; object-fit:contain; }
+  .gallery-item{cursor:zoom-in;}
   .gallery-item:focus-visible{outline:3px solid var(--brass-soft);outline-offset:3px;}
+  .lightbox:not(.is-open){pointer-events:none;}
   .demo-contact{background:var(--ink-soft);border-block:1px solid var(--line);}
   .demo-contact .wrap{max-width:850px;text-align:center;}
   .demo-contact p{color:var(--bone-dim);margin:1.3rem auto 0;max-width:600px;}
@@ -473,9 +475,9 @@
       background:var(--ink-soft); border-left:1px solid var(--line);
       flex-direction:column; align-items:flex-start; justify-content:flex-start;
       padding:6.5rem 2rem 2rem; gap:1.6rem;
-      transform:translateX(100%); transition:transform .45s var(--ease);
+      transform:translateX(100%); visibility:hidden; pointer-events:none; transition:transform .45s var(--ease), visibility .45s;
     }
-    .primary-nav.is-open{ transform:translateX(0); }
+    .primary-nav.is-open{ transform:translateX(0); visibility:visible;pointer-events:auto; }
     .primary-nav a{ font-size:1.15rem; }
     .header-actions .btn-ghost{ display:none; }
     .nav-toggle{ display:block; }
@@ -693,23 +695,23 @@
           <img src="https://images.unsplash.com/photo-1672642150228-3fcd5826ec26?auto=format&fit=crop&w=1000&q=70" alt="Corte de precisión en proceso">
           <div class="gallery-cap">Corte de precisión</div>
         </div>
-        <div class="gallery-item">
+        <div class="gallery-item" role="button" tabindex="0" aria-label="Ampliar imagen de galería">
           <img src="https://images.unsplash.com/photo-1582771498000-8ad44e6c84db?auto=format&fit=crop&w=800&q=70" alt="Cliente durante un corte clásico">
           <div class="gallery-cap">Corte clásico</div>
         </div>
-        <div class="gallery-item">
+        <div class="gallery-item" role="button" tabindex="0" aria-label="Ampliar imagen de galería">
           <img src="https://images.unsplash.com/photo-1672642150228-3fcd5826ec26?auto=format&fit=crop&w=900&q=75" alt="Herramientas de barbería sobre mesa de madera">
           <div class="gallery-cap">Nuestras herramientas</div>
         </div>
-        <div class="gallery-item">
+        <div class="gallery-item" role="button" tabindex="0" aria-label="Ampliar imagen de galería">
           <img src="https://images.unsplash.com/photo-1672642150228-3fcd5826ec26?auto=format&fit=crop&w=900&q=75" alt="Interior del local">
           <div class="gallery-cap">El local</div>
         </div>
-        <div class="gallery-item">
+        <div class="gallery-item" role="button" tabindex="0" aria-label="Ampliar imagen de galería">
           <img src="https://images.unsplash.com/photo-1582771498000-8ad44e6c84db?auto=format&fit=crop&w=800&q=70&flip=h" alt="Detalle de barba perfilada">
           <div class="gallery-cap">Barba perfilada</div>
         </div>
-        <div class="gallery-item">
+        <div class="gallery-item" role="button" tabindex="0" aria-label="Ampliar imagen de galería">
           <img src="https://images.unsplash.com/photo-1672642150228-3fcd5826ec26?auto=format&fit=crop&w=1200&q=70&flip=h" alt="Sesión de afeitado tradicional">
           <div class="gallery-cap">Afeitado tradicional</div>
         </div>
