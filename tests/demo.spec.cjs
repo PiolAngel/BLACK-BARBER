@@ -66,6 +66,7 @@ test('imagen de vista previa OG existe, se decodifica y mide 1200 × 630', async
     return colors.size;
   });
   console.log('OG diagnostic: unique RGB colors =', paletteSize);
+  expect(paletteSize, 'La imagen OG no debe tener texto posterizado con paleta mínima').toBeGreaterThan(64);
 });
 
 test('Open Graph y Twitter apuntan al logo público, no a la galería', async ({ page }) => {
