@@ -9,7 +9,7 @@ const { once } = require('node:events');
   try {
     await new Promise(resolve => setTimeout(resolve, 1200));
     browser = await chromium.launch({ headless: true });
-    mkdirSync('.visual-review', { recursive: true });
+    mkdirSync('visual-review', { recursive: true });
     for (const viewport of [
       { name: 'escritorio', width: 1440, height: 900 },
       { name: 'tablet', width: 820, height: 900 },
@@ -37,12 +37,12 @@ const { once } = require('node:events');
         throw Error(viewport.name + ' has horizontal overflow: ' + JSON.stringify(metrics));
       }
       if (errors.length) throw Error(viewport.name + ' JS errors: ' + errors.join('; '));
-      await page.screenshot({path: '.visual-review/' + viewport.name + '-completo.jpg', fullPage: true, type: 'jpeg', quality: 72, animations: 'disabled'});
+      await page.screenshot({path: 'visual-review/' + viewport.name + '-completo.jpg', fullPage: true, type: 'jpeg', quality: 72, animations: 'disabled'});
       console.log('VISUAL', viewport.name, JSON.stringify(metrics));
       if (viewport.width <= 1023) {
         await page.locator('#navToggle').click();
         await page.waitForTimeout(600);
-        await page.screenshot({path: '.visual-review/' + viewport.name + '-menu-abierto.jpg', fullPage: false, type: 'jpeg', quality: 78, animations: 'disabled'});
+        await page.screenshot({path: 'visual-review/' + viewport.name + '-menu-abierto.jpg', fullPage: false, type: 'jpeg', quality: 78, animations: 'disabled'});
         const opened = await page.locator('#navToggle').getAttribute('aria-expanded');
         if (opened !== 'true') throw Error('menu failed on ' + viewport.name);
       }
@@ -50,7 +50,7 @@ const { once } = require('node:events');
     }
     const page = await browser.newPage({viewport: {width:1200,height:630},deviceScaleFactor:1});
     await page.goto('http://127.0.0.1:4173/black-barber-og.png');
-    await page.screenshot({path: '.visual-review/og-final.png', fullPage: true});
+    await page.screenshot({path: 'visual-review/og-final.png', fullPage: true});
     await page.close();
     console.log('Visual screenshots saved.');
   } finally {
