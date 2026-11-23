@@ -21,14 +21,15 @@
      y reemplazalo por el número real del negocio en TODOS los lugares.
 ============================================================================ -->
 
-<title>BLACK BARBER — Barbería premium en Asunción | Cortes, barba y afeitado clásico</title>
-<meta name="description" content="BLACK BARBER: barbería premium en Asunción. Cortes de precisión, arreglo de barba y afeitado tradicional. Reservá tu turno por WhatsApp.">
+<title>BLACK BARBER | Demo de barbería premium en Paraguay</title>
+<meta name="description" content="BLACK BARBER: demostración de una web premium para barberías en Paraguay. Diseño ilustrativo, servicios y experiencia de reserva de ejemplo.">
+<meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#0e0c0a">
 
 <!-- EDITAR: actualizar estas URLs cuando el sitio tenga dominio propio -->
 <meta property="og:type" content="business.business">
-<meta property="og:title" content="BLACK BARBER — Barbería premium en Asunción">
-<meta property="og:description" content="Cortes de precisión, arreglo de barba y afeitado tradicional. Reservá tu turno por WhatsApp.">
+<meta property="og:title" content="BLACK BARBER — Demostración de barbería premium">
+<meta property="og:description" content="Sitio web de demostración comercial. Negocio, reseñas, precios y datos ilustrativos.">
 <meta property="og:image" content="https://images.unsplash.com/photo-1672642150228-3fcd5826ec26?auto=format&fit=crop&w=1200&q=70">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -38,30 +39,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<!-- Datos estructurados para SEO local — ayuda a que Google muestre horario,
-     dirección y tipo de negocio directamente en los resultados de búsqueda.
-     EDITAR: reemplazar todos los valores por los datos reales del negocio. -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HairSalon",
-  "name": "BLACK BARBER",
-  "image": "https://detallesorballo.com/wp-content/uploads/2020/09/imagen-de-prueba-320x240-1.jpg",
-  "telephone": "+595981951940",
-  "priceRange": "₲₲",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Av. España 1234",
-    "addressLocality": "Asunción",
-    "addressCountry": "PY"
-  },
-  "openingHoursSpecification": [
-    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "20:00" },
-    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "18:00" }
-  ],
-  "sameAs": ["https://www.instagram.com/larios.ang/"]
-}
-</script>
+<!-- Proyecto demostrativo: se omiten datos estructurados de negocio real. -->
 
 <style>
   /* =========================================================
@@ -147,14 +125,16 @@
   /* =========================================================
      HEADER / NAV
   ========================================================= */
+  .demo-banner{position:relative;z-index:120;background:#b3894f;color:#0e0c0a;text-align:center;padding:.48rem 1rem;font-size:.82rem;line-height:1.45;}
+  .demo-banner strong{letter-spacing:.08em;}
   .site-header{
-    position:fixed; inset:0 0 auto 0; z-index:100;
+    position:absolute; top:34px; left:0; right:0; z-index:100;
     padding:1.15rem 0;
     background:transparent;
     transition:background-color .4s var(--ease), padding .4s var(--ease), border-color .4s var(--ease);
     border-bottom:1px solid transparent;
   }
-  .site-header.is-scrolled{
+  .site-header.is-scrolled{position:fixed;top:0;
     background:rgba(14,12,10,.92);
     -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
     border-color:var(--line);
@@ -260,7 +240,7 @@
   /* =========================================================
      SECCIONES — estructura general
   ========================================================= */
-  section{ padding:clamp(4.5rem,10vw,7.5rem) 0; }
+  section{ padding:clamp(4.5rem,10vw,7.5rem) 0; scroll-margin-top:90px; }
   .section-head{ max-width:640px; margin-bottom:clamp(2.5rem,6vw,4rem); }
   .section-head h2{ font-size:clamp(2rem,4.4vw,3.1rem); }
   .section-head p{ margin-top:1rem; color:var(--bone-dim); font-size:1.05rem; }
@@ -465,6 +445,13 @@
   }
   .lightbox.is-open{ opacity:1; visibility:visible; }
   .lightbox img{ max-width:90vw; max-height:85vh; object-fit:contain; }
+  .gallery-item:focus-visible{outline:3px solid var(--brass-soft);outline-offset:3px;}
+  .demo-contact{background:var(--ink-soft);border-block:1px solid var(--line);}
+  .demo-contact .wrap{max-width:850px;text-align:center;}
+  .demo-contact p{color:var(--bone-dim);margin:1.3rem auto 0;max-width:600px;}
+  @media(max-width:520px){.header-actions>.btn-primary{display:none}.demo-banner{font-size:.72rem}.hero{padding-top:7rem}.whatsapp-fab{width:48px;height:48px;right:.9rem;bottom:.9rem}}
+  @media(prefers-reduced-motion:reduce){.reveal,.hero-sub,.hero-actions,.hero-stats{opacity:1;transform:none}.hero h1 .line span{transform:none}}
+
   .lightbox-close{
     position:absolute; top:1.5rem; right:1.5rem; width:44px; height:44px;
     border:1px solid var(--line-strong); border-radius:50%; background:transparent; color:var(--bone);
@@ -508,6 +495,7 @@
 </style>
 </head>
 <body>
+<div class="demo-banner" role="note"><strong>DEMO COMERCIAL</strong> · BLACK BARBER es una barbería ficticia. Información, fotos y testimonios ilustrativos; no se toman reservas.</div>
 
 <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
@@ -530,10 +518,10 @@
 
     <div class="header-actions">
       <!-- EDITAR: número de WhatsApp real -->
-      <a class="btn btn-ghost" href="https://wa.me/595981951940?text=Hola%20BLACK%20BARBER%2C%20quiero%20reservar%20un%20turno" target="_blank" rel="noopener">
+      <a class="btn btn-ghost" href="#contacto-demo">
         WhatsApp
       </a>
-      <a class="btn btn-primary" href="#servicios">Reservar turno</a>
+      <a class="btn btn-primary" href="#servicios">Ver servicios</a>
       <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="primaryNav">
         <span></span>
       </button>
@@ -550,7 +538,7 @@
   <section class="hero" id="inicio">
     <div class="hero-media" aria-hidden="true">
       <!-- EDITAR: reemplazar por foto real del local o de un corte terminado -->
-      <img src="https://biblus.accasoftware.com/es/wp-content/uploads/sites/3/2024/12/proyecto-tienda-peluqueria_3-1.jpg.webp">
+      <img src="https://images.unsplash.com/photo-1672642150228-3fcd5826ec26?auto=format&fit=crop&w=1800&q=80">
     </div>
     <div class="wrap">
       <div class="hero-content">
@@ -561,7 +549,7 @@
         </h1>
         <p class="hero-sub">En BLACK BARBER combinamos técnica clásica de barbería con un ojo moderno para el detalle. Sin apuros, sin plantillas: cada cliente sale con un corte pensado para su cara y su estilo.</p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="https://wa.me/595981951940?text=Hola%20BLACK%20BARBER%2C%20quiero%20reservar%20un%20turno" target="_blank" rel="noopener">
+          <a class="btn btn-primary" href="#contacto-demo">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.48 1.34 5L2 22l5.2-1.36a9.94 9.94 0 0 0 4.84 1.23h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2zm0 18.2h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.1.81.83-3.02-.2-.31a8.22 8.22 0 0 1-1.26-4.4c0-4.55 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.41a8.19 8.19 0 0 1 2.41 5.83c0 4.55-3.7 8.24-8.27 8.24zm4.52-6.17c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.44.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.89 2.41 1.02 2.58.12.17 1.75 2.68 4.25 3.75.59.26 1.06.41 1.42.53.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.16-.48-.28z"/></svg>
             Reservar por WhatsApp
           </a>
@@ -569,8 +557,8 @@
         </div>
         <div class="hero-stats">
           <div class="hero-stat"><b>+6</b><span>años de trayectoria</span></div>
-          <div class="hero-stat"><b>+4.000</b><span>cortes realizados</span></div>
-          <div class="hero-stat"><b>4.9/5</b><span>en reseñas de clientes</span></div>
+          <div class="hero-stat"><b>7</b><span>servicios de ejemplo</span></div>
+          <div class="hero-stat"><b>100%</b><span>experiencia demostrativa</span></div>
         </div>
       </div>
     </div>
@@ -584,23 +572,23 @@
     <div class="wrap about-grid">
       <div class="about-media reveal">
         <!-- EDITAR: reemplazar por foto real del equipo o del local -->
-        <img src="https://img.magnific.com/foto-gratis/peluquero-masculino-que-corta-pelo-cliente_23-2147839782.jpg?semt=ais_hybrid&w=740&q=80" alt="Barbero de BLACK BARBER realizando un corte de precisión">
+        <img src="https://images.unsplash.com/photo-1582771498000-8ad44e6c84db?auto=format&fit=crop&w=1000&q=80" alt="Fotografía ilustrativa de un barbero realizando un corte">
         <div class="about-fact">
           <b>2019</b>
-          <span>El año en que abrimos nuestras puertas en Asunción</span>
+          <span>Año ficticio de apertura del concepto</span>
         </div>
       </div>
       <div class="about-copy reveal">
         <div class="section-head">
           <h2>Un oficio que se aprende con las manos, no con atajos</h2>
         </div>
-        <p>BLACK BARBER nació de una idea simple: un buen corte no se apura. Formamos a nuestro equipo en técnicas clásicas de barbería —tijera, navaja, degradado a mano— y las combinamos con las tendencias que piden los clientes de hoy.</p>
+        <p>En esta historia de ejemplo, BLACK BARBER nació de una idea simple: un buen corte no se apura. Formamos a nuestro equipo en técnicas clásicas de barbería —tijera, navaja, degradado a mano— y las combinamos con las tendencias que piden los clientes de hoy.</p>
         <p>Cada visita empieza con una charla sobre lo que buscás, sigue con el corte y termina con los detalles que hacen la diferencia: perfilado, toalla caliente y un repaso final frente al espejo antes de que te vayas.</p>
         <ul class="about-values">
           <li><h3>Técnica clásica</h3><p>Navaja, tijera y degradado trabajados a mano por barberos con formación.</p></li>
           <li><h3>Sin apuros</h3><p>Turnos con tiempo real por cliente, no citas encimadas cada 15 minutos.</p></li>
           <li><h3>Productos propios</h3><p>Línea de cuidado para barba y cabello pensada para el clima local.</p></li>
-          <li><h3>Ambiente pensado</h3><p>Un espacio cómodo, con música y buena onda, para que el corte sea parte del día.</p></li>
+          <li><h3>Ambiente pensado</h3><p>Un espacio imaginado para inspirar el diseño de una barbería real.</p></li>
         </ul>
       </div>
     </div>
@@ -683,8 +671,8 @@
       </div>
 
       <div class="services-foot">
-        <p class="services-note">¿No estás seguro qué servicio elegir? Escribinos por WhatsApp y te recomendamos el mejor corte para vos.</p>
-        <a class="btn btn-primary" href="https://wa.me/595981951940?text=Hola%2C%20quiero%20consultar%20por%20un%20servicio" target="_blank" rel="noopener">Consultar y reservar</a>
+        <p class="services-note">En una web real, este botón podría conectar con WhatsApp del negocio. Aquí solamente demuestra la navegación.</p>
+        <a class="btn btn-primary" href="#contacto-demo">Ver contacto de ejemplo</a>
       </div>
     </div>
   </section>
@@ -697,11 +685,11 @@
     <div class="wrap">
       <div class="section-head reveal">
         <h2>Trabajos recientes</h2>
-        <p>Una muestra de cortes, barbas y detalles hechos en el local.</p>
+        <p>Galería ilustrativa con fotografías de referencia para visualizar el estilo de una barbería premium.</p>
       </div>
 
       <div class="gallery-grid reveal">
-        <div class="gallery-item">
+        <div class="gallery-item" role="button" tabindex="0" aria-label="Ampliar imagen de galería">
           <img src="https://images.unsplash.com/photo-1672642150228-3fcd5826ec26?auto=format&fit=crop&w=1000&q=70" alt="Corte de precisión en proceso">
           <div class="gallery-cap">Corte de precisión</div>
         </div>
@@ -710,11 +698,11 @@
           <div class="gallery-cap">Corte clásico</div>
         </div>
         <div class="gallery-item">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQjD6KczqQ8YpYA0d9_8KAsd5p9MSeTpR9rOIwNCVg_SyYacKOUxf1GQ&s=10" alt="Herramientas de barbería sobre mesa de madera">
+          <img src="https://images.unsplash.com/photo-1672642150228-3fcd5826ec26?auto=format&fit=crop&w=900&q=75" alt="Herramientas de barbería sobre mesa de madera">
           <div class="gallery-cap">Nuestras herramientas</div>
         </div>
         <div class="gallery-item">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSw-g-ZyFRxyN7nE5qFCSMQAMbOSeJXjthFpZUnIo6zG0LNoeeSJeqpWtwv&s=10" alt="Interior del local">
+          <img src="https://images.unsplash.com/photo-1672642150228-3fcd5826ec26?auto=format&fit=crop&w=900&q=75" alt="Interior del local">
           <div class="gallery-cap">El local</div>
         </div>
         <div class="gallery-item">
@@ -736,30 +724,31 @@
   <section class="testimonials" id="testimonios">
     <div class="wrap">
       <div class="testi-shell reveal">
+        <p style="color:var(--brass-soft);font-size:.85rem;letter-spacing:.06em;text-transform:uppercase">Opiniones de ejemplo — no son reseñas reales</p>
         <div class="testi-quotemark" aria-hidden="true">&ldquo;</div>
 
         <div class="testi-slide is-active">
           <p class="testi-text">Fui varias veces a otras barberías de la zona y ninguna me dejó tan conforme. El degradado quedó perfecto y el trato fue excelente de principio a fin.</p>
           <p class="testi-stars" aria-label="5 de 5 estrellas">★★★★★</p>
-          <p class="testi-name"><b>Diego Benítez</b> — cliente desde 2021</p>
+          <p class="testi-name"><b>Testimonio ficticio 01</b> — ejemplo de diseño</p>
         </div>
 
         <div class="testi-slide">
           <p class="testi-text">El afeitado a navaja es otro nivel. Ambiente relajado, buena música y te vas sintiéndote realmente atendido, no apurado.</p>
           <p class="testi-stars" aria-label="5 de 5 estrellas">★★★★★</p>
-          <p class="testi-name"><b>Marcelo Insfrán</b> — cliente frecuente</p>
+          <p class="testi-name"><b>Testimonio ficticio 02</b> — ejemplo de diseño</p>
         </div>
 
         <div class="testi-slide">
           <p class="testi-text">Reservé por WhatsApp un jueves a la noche y me confirmaron en minutos. Puntualidad y buen ojo para recomendar el corte según la forma de cara.</p>
           <p class="testi-stars" aria-label="5 de 5 estrellas">★★★★★</p>
-          <p class="testi-name"><b>Julio César Ortiz</b> — cliente desde 2022</p>
+          <p class="testi-name"><b>Testimonio ficticio 03</b> — ejemplo de diseño</p>
         </div>
 
-        <div class="testi-nav" role="tablist" aria-label="Seleccionar testimonio">
-          <button class="testi-dot is-active" aria-label="Testimonio 1" aria-selected="true"></button>
-          <button class="testi-dot" aria-label="Testimonio 2" aria-selected="false"></button>
-          <button class="testi-dot" aria-label="Testimonio 3" aria-selected="false"></button>
+        <div class="testi-nav" aria-label="Seleccionar testimonio">
+          <button class="testi-dot is-active" aria-label="Testimonio 1" aria-pressed="true"></button>
+          <button class="testi-dot" aria-label="Testimonio 2" aria-pressed="false"></button>
+          <button class="testi-dot" aria-label="Testimonio 3" aria-pressed="false"></button>
         </div>
       </div>
     </div>
@@ -782,21 +771,13 @@
           <div class="hours-row is-closed"><span>Domingos</span><span>Cerrado</span></div>
         </div>
         <div class="location-info">
-          <p><strong>Dirección:</strong> Av. España 1234, Asunción, Paraguay</p>
-          <p><strong>Teléfono / WhatsApp:</strong> <a href="https://wa.me/595981951940" target="_blank" rel="noopener">+595 981 951 940</a></p>
-          <p><a href="https://www.google.com/maps/search/?api=1&query=Av.+España+1234+Asunción+Paraguay" target="_blank" rel="noopener">Cómo llegar en Google Maps →</a></p>
+          <p><strong>Ubicación ilustrativa:</strong> Asunción, Paraguay — sin local físico real.</p>
+          <p><strong>Contacto:</strong> simulación comercial, sin atención al público.</p>
+          <p>Los horarios y precios mostrados son ejemplos, no una oferta comercial real.</p>
         </div>
       </div>
 
-      <div class="map-frame reveal">
-        <!-- EDITAR: reemplazar por la ubicación real del negocio en Google Maps -->
-        <iframe
-          src="https://www.google.com/maps?q=Asunci%C3%B3n%2C%20Paraguay&output=embed"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          title="Ubicación de BLACK BARBER en el mapa">
-        </iframe>
-      </div>
+      <div class="map-frame reveal" role="img" aria-label="Panel ilustrativo de ubicación en Asunción, Paraguay" style="display:grid;place-items:center;text-align:center;padding:2rem;border:1px solid var(--line)"><div><span style="font-family:var(--font-display);font-size:clamp(2rem,5vw,3.5rem);color:var(--brass-soft)">Asunción</span><p style="margin-top:1rem;color:var(--bone-dim)">Paraguay · ubicación de demostración</p><p style="margin-top:.7rem;color:var(--bone-faint);font-size:.9rem">Sin dirección ni mapa de un negocio real</p></div></div>
     </div>
   </section>
 
@@ -805,16 +786,16 @@
   ========================================================= -->
   <section class="cta-band">
     <div class="hero-media" aria-hidden="true">
-      <img src="https://images.unsplash.com/photo-1781450090585-1a511b7066d9?auto=format&fit=crop&w=2000&q=70" alt="">
+      <img src="https://images.unsplash.com/photo-1582771498000-8ad44e6c84db?auto=format&fit=crop&w=1800&q=75" alt="">
     </div>
     <div class="wrap">
       <div class="cta-band-inner">
-        <h2>Tu próximo corte empieza con un mensaje</h2>
-        <p>Elegí el día y el horario que te queden bien — te confirmamos por WhatsApp en minutos.</p>
+        <h2>Imaginá tu próxima web con esta experiencia</h2>
+        <p>Esta página muestra cómo podría verse una barbería premium. Las reservas están desactivadas en esta demostración.</p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="https://wa.me/595981951940?text=Hola%20BLACK%20BARBER%2C%20quiero%20reservar%20un%20turno" target="_blank" rel="noopener">
+          <a class="btn btn-primary" href="#contacto-demo">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.48 1.34 5L2 22l5.2-1.36a9.94 9.94 0 0 0 4.84 1.23h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2zm0 18.2h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.1.81.83-3.02-.2-.31a8.22 8.22 0 0 1-1.26-4.4c0-4.55 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.41a8.19 8.19 0 0 1 2.41 5.83c0 4.55-3.7 8.24-8.27 8.24zm4.52-6.17c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.44.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.89 2.41 1.02 2.58.12.17 1.75 2.68 4.25 3.75.59.26 1.06.41 1.42.53.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.16-.48-.28z"/></svg>
-            Escribir por WhatsApp
+            Ver demostración de contacto
           </a>
         </div>
       </div>
@@ -822,6 +803,8 @@
   </section>
 
 </main>
+
+<section class="demo-contact" id="contacto-demo"><div class="wrap"><h2>Así funcionaría el contacto</h2><p>En el sitio de una barbería real, los botones de reserva conectarían con su WhatsApp o agenda. Esta es una demostración: no se recogen datos ni se envían mensajes.</p><p><a class="btn btn-ghost" href="#servicios">Explorar servicios de ejemplo</a></p></div></section>
 
 <!-- =========================================================
      FOOTER
@@ -831,16 +814,16 @@
   <div class="wrap footer-top">
     <div class="footer-brand">
       <span class="brand-mark">BLACK <em>BARBER</em></span>
-      <p>Barbería premium en Asunción. Cortes de precisión, barba y afeitado clásico, con turno por WhatsApp.</p>
+      <p>Concepto ficticio de barbería premium en Asunción, creado como demostración comercial.</p>
       <div class="footer-social" aria-label="Redes sociales">
         <!-- EDITAR: enlaces reales de Instagram, TikTok y Facebook -->
-        <a href="https://www.instagram.com/larios.ang/" target="_blank" rel="noopener" aria-label="Instagram">
+        <a href="#contacto-demo" aria-label="Instagram">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
         </a>
-        <a href="https://www.tiktok.com/@ang.larios?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener" aria-label="TikTok">
+        <a href="#contacto-demo" aria-label="TikTok">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 3c.3 1.9 1.6 3.4 3.4 3.9v2.4c-1.3 0-2.5-.4-3.4-1.1v6.2a5 5 0 1 1-4.3-4.95v2.5a2.5 2.5 0 1 0 1.8 2.4V3h2.5z"/></svg>
         </a>
-        <a href="https://www.facebook.com/profile.php?id=100088973084744" target="_blank" rel="noopener" aria-label="Facebook">
+        <a href="#contacto-demo" aria-label="Facebook">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.5H16l.4-3H13.5V8.4c0-.87.24-1.46 1.5-1.46H16.5V4.35C16.2 4.31 15.2 4.22 14 4.22c-2.4 0-4 1.46-4 4.15V10.5H7.5v3H10V21h3.5z"/></svg>
         </a>
       </div>
@@ -859,9 +842,9 @@
     <div class="footer-col">
       <h3>Contacto</h3>
       <ul>
-        <li><a href="https://wa.me/595981951940" target="_blank" rel="noopener">+595 981 951 940</a></li>
-        <li><a href="#ubicacion">Av. España 1234, Asunción</a></li>
-        <li><a href="#ubicacion">Lun a sáb, 9:00 – 20:00</a></li>
+        <li><a href="#contacto-demo">Contacto ilustrativo</a></li>
+        <li><a href="#ubicacion">Asunción (ubicación ficticia)</a></li>
+        <li><a href="#ubicacion">Horarios de ejemplo</a></li>
       </ul>
     </div>
   </div>
@@ -869,17 +852,17 @@
   <div class="wrap footer-bottom">
     <span>© <span id="anioActual">2026</span> BLACK BARBER. Todos los derechos reservados.</span>
     <!-- EDITAR: reemplazar por tu nombre/marca y enlace de contacto como desarrollador -->
-    <span>Sitio web diseñado y desarrollado por <a href="https://www.instagram.com/larios.ang/" target="_blank" rel="noopener">Angel Larios</a></span>
+    <span>Sitio web de demostración · Agencia web en Paraguay</span>
   </div>
 </footer>
 
-<!-- WhatsApp flotante — EDITAR número real -->
-<a class="whatsapp-fab" href="https://wa.me/595981951940?text=Hola%20BLACK%20BARBER%2C%20quiero%20reservar%20un%20turno" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+<!-- Acceso flotante a la sección de contacto demostrativo -->
+<a class="whatsapp-fab" href="#contacto-demo" aria-label="Ver simulación de contacto">
   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.48 1.34 5L2 22l5.2-1.36a9.94 9.94 0 0 0 4.84 1.23h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2zm0 18.2h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.1.81.83-3.02-.2-.31a8.22 8.22 0 0 1-1.26-4.4c0-4.55 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.41a8.19 8.19 0 0 1 2.41 5.83c0 4.55-3.7 8.24-8.27 8.24zm4.52-6.17c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.44.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.89 2.41 1.02 2.58.12.17 1.75 2.68 4.25 3.75.59.26 1.06.41 1.42.53.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.16-.48-.28z"/></svg>
 </a>
 
 <!-- Lightbox para la galería -->
-<div class="lightbox" id="lightbox">
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Imagen ampliada" aria-hidden="true">
   <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar imagen">&times;</button>
   <img id="lightboxImg" src="" alt="">
 </div>
@@ -909,6 +892,7 @@
     toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     toggle.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
   });
+  document.addEventListener('click',function(e){if(nav.classList.contains('is-open')&&!nav.contains(e.target)&&!toggle.contains(e.target)){nav.classList.remove('is-open');toggle.setAttribute('aria-expanded','false');}});
   nav.querySelectorAll('a').forEach(function(link){
     link.addEventListener('click', function(){
       nav.classList.remove('is-open');
@@ -946,11 +930,11 @@
   function showSlide(i){
     slides[current].classList.remove('is-active');
     dots[current].classList.remove('is-active');
-    dots[current].setAttribute('aria-selected', 'false');
+    dots[current].setAttribute('aria-pressed', 'false');
     current = (i + slides.length) % slides.length;
     slides[current].classList.add('is-active');
     dots[current].classList.add('is-active');
-    dots[current].setAttribute('aria-selected', 'true');
+    dots[current].setAttribute('aria-pressed', 'true');
   }
   dots.forEach(function(dot, i){
     dot.addEventListener('click', function(){ showSlide(i); resetTimer(); });
@@ -959,7 +943,7 @@
     clearInterval(timer);
     timer = setInterval(function(){ showSlide(current + 1); }, 6000);
   }
-  if (slides.length) resetTimer();
+  if (slides.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) resetTimer();
 
   /* Galería: lightbox */
   var lightbox = document.getElementById('lightbox');
@@ -967,16 +951,23 @@
   var lightboxClose = document.getElementById('lightboxClose');
 
   document.querySelectorAll('.gallery-item img').forEach(function(img){
-    img.addEventListener('click', function(){
+    var item = img.parentElement;
+    function openGallery(){
       lightboxImg.src = img.src.replace(/w=\d+/, 'w=1600');
       lightboxImg.alt = img.alt;
       lightbox.classList.add('is-open');
-    });
+      lightbox.setAttribute('aria-hidden', 'false');
+      lightboxClose.focus();
+    }
+    item.addEventListener('click', openGallery);
+    item.addEventListener('keydown', function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openGallery();}});
   });
-  function closeLightbox(){ lightbox.classList.remove('is-open'); lightboxImg.src = ''; }
+  var lastFocused = null;
+  document.querySelectorAll('.gallery-item').forEach(function(item){item.addEventListener('click',function(){lastFocused=item;});item.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){lastFocused=item;}});});
+  function closeLightbox(){ lightbox.classList.remove('is-open');lightbox.setAttribute('aria-hidden','true'); lightboxImg.src = '';if(lastFocused)lastFocused.focus(); }
   lightboxClose.addEventListener('click', closeLightbox);
   lightbox.addEventListener('click', function(e){ if (e.target === lightbox) closeLightbox(); });
-  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeLightbox(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') {closeLightbox();nav.classList.remove('is-open');toggle.setAttribute('aria-expanded','false');} if (e.key==='Tab' && lightbox.classList.contains('is-open')){e.preventDefault();lightboxClose.focus();} });
 
 })();
 </script>
