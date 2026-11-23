@@ -63,3 +63,30 @@ test('Open Graph y Twitter apuntan al logo público, no a la galería', async ({
   await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute('content', 'summary_large_image');
   await expect(page.locator('link[rel="icon"]')).toHaveAttribute('href', /^data:image\/svg\+xml/);
 });
+
+test('no hay scroll horizontal en tamaños móviles y tablet, con menú cerrado y abierto', async ({ page }) => {
+  for (const width of [320, 360, 390, 430, 640, 768, 820, 860, 1024]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('/');
+    const inspect = async (state) => {
+      const metrics = await page.evaluate(() => ({
+        viewport: document.documentElement.clientWidth,
+        document: document.documentElement.scrollWidth,
+        body: document.body.scrollWidth,
+        overflows: [...document.querySelectorAll('body *')].filter(el => {
+          const r=el.getBoundingClientRect();
+          const style=getComputedStyle(el);
+          return r.right > innerWidth+2 && style.position !== 'fixed' && style.visibility !== 'hidden';
+        }).slice(0,8).map(el=>({ tag:el.tagName, cls:String(el.className).slice(0,80) }))
+      }));
+      expect(metrics.document, JSON.stringify({width,state,metrics})).toBeLessThanOrEqual(metrics.viewport + 1);
+    };
+    await inspect('closed');
+    if (width <= 860) {
+      await page.locator('#navToggle').click();
+      await inspect('open');
+      await page.locator('#navToggle').click();
+      await inspect('closed-again');
+    }
+  }
+});
