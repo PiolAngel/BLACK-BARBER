@@ -48,6 +48,24 @@ test('imagen de vista previa OG existe, se decodifica y mide 1200 × 630', async
     return { width: image.naturalWidth, height: image.naturalHeight };
   });
   expect(dimensions).toEqual({ width: 1200, height: 630 });
+  // Diagnóstico de calidad: la paleta real del PNG permite detectar posterización excesiva.
+  const paletteSize = await page.evaluate(async () => {
+    const img = new Image();
+    img.src = '/black-barber-og.png';
+    await img.decode();
+    const canvas = document.createElement('canvas');
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    ctx.drawImage(img, 0, 0);
+    const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+    const colors = new Set();
+    for (let i = 0; i < pixels.length; i += 4) {
+      colors.add((pixels[i] << 16) | (pixels[i + 1] << 8) | pixels[i + 2]);
+    }
+    return colors.size;
+  });
+  console.log('OG diagnostic: unique RGB colors =', paletteSize);
 });
 
 test('Open Graph y Twitter apuntan al logo público, no a la galería', async ({ page }) => {
