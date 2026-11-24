@@ -126,8 +126,14 @@ test('menú móvil cubre viewport después de scroll y restaura desplazamiento',
     await page.setViewportSize({ width, height: 750 });
     await page.goto('/');
     for (const y of [450, 1400, 3200]) {
-      await page.evaluate(y => window.scrollTo(0, y), y);
-      await page.waitForTimeout(450);
+      // Simular a un usuario que ya terminó de desplazarse.
+      // El sitio tiene scroll-behavior:smooth; sin desactivarlo la animación
+      // sigue avanzando mientras se toma la medida inicial.
+      await page.evaluate(y => {
+        document.documentElement.style.scrollBehavior = 'auto';
+        window.scrollTo(0, y);
+      }, y);
+      await page.waitForTimeout(120);
       const before = await page.evaluate(() => window.scrollY);
       await page.locator('#navToggle').click();
       const metrics = await page.locator('#primaryNav').evaluate(el => {
@@ -143,9 +149,7 @@ test('menú móvil cubre viewport después de scroll y restaura desplazamiento',
       await page.locator('#navClose').click();
       await expect(page.locator('#navToggle')).toHaveAttribute('aria-expanded','false');
       const after = await page.evaluate(() => window.scrollY);
-      // El click sobre un header sticky puede reajustar unos píxeles en Chromium.
-      // Comprobar que el usuario permanece en el mismo contexto de lectura.
-      expect(Math.abs(after - before), JSON.stringify({width,y,before,after})).toBeLessThanOrEqual(12);
+      expect(Math.abs(after - before), JSON.stringify({width,y,before,after})).toBeLessThanOrEqual(2);
     }
   }
 });
