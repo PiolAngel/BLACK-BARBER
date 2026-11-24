@@ -26,7 +26,7 @@ test('consulta WhatsApp: servicio, edición y destinatario autorizado', async ({
   expect(parsed.pathname).toBe('/595981951940');
   expect(parsed.searchParams.get('text')).toBe('Hola BLACK BARBER, consulto por Corte + barba. ¿Tienen hora el viernes?');
   await expect(page.locator('#demoMessage')).toHaveValue(/¿Tienen hora el viernes/);
-  await expect(page.locator('#demoStatus')).toContainText('envío');
+  await expect(page.locator('#demoStatus')).toContainText('decidís');
 });
 
 test('las redes muestran información de demostración', async ({ page }) => {
