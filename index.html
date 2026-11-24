@@ -190,6 +190,11 @@
   .nav-toggle[aria-expanded="true"] span{ background:transparent; }
   .nav-toggle[aria-expanded="true"] span::before{ top:0; transform:rotate(45deg); }
   .nav-toggle[aria-expanded="true"] span::after{ top:0; transform:rotate(-45deg); }
+  .nav-toggle[aria-expanded="true"] span{ visibility:hidden; }
+  .nav-toggle[aria-expanded="true"]::after{
+    content:"×"; position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    color:var(--bone); font-size:25px; line-height:1;
+  }
 
   /* =========================================================
      HERO
@@ -496,7 +501,7 @@
     .footer-top{ grid-template-columns:1fr 1fr; }
   }
 
-  @media (max-width: 860px){
+  @media (max-width: 1023px){
     .primary-nav{
       position:fixed; inset:0 0 0 auto; width:min(78vw,340px);
       background:var(--ink-soft); border-left:1px solid var(--line);
