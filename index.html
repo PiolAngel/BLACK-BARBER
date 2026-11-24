@@ -536,7 +536,7 @@
   .demo-form{max-width:680px;}
   .demo-form-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;}
   .demo-form input{display:block;width:100%;min-width:0;background:var(--ink-soft);color:var(--bone);border:1px solid var(--line-strong);border-radius:3px;padding:.8rem;font:inherit;margin-bottom:1.35rem;}
-  .demo-form textarea{min-height:155px;line-height:1.6;resize:vertical;}
+  .demo-form textarea{min-height:205px;line-height:1.6;resize:vertical;}
   .field-optional,.demo-hint{color:var(--bone-faint);font-size:.83rem;font-weight:400;}
   .demo-form .demo-hint{margin:.5rem 0 0;text-align:left;}
   .demo-form input:focus-visible,.demo-form select:focus-visible,.demo-form textarea:focus-visible{outline:2px solid var(--brass-soft);outline-offset:1px;}
@@ -544,6 +544,8 @@
   .nav-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:249;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .25s;}
   .nav-backdrop.is-open{visibility:visible;opacity:1;pointer-events:auto;}
   .nav-close{display:none;}
+  .whatsapp-fab.is-hidden{opacity:0;visibility:hidden;pointer-events:none;transform:translateY(12px);}
+  #contacto-demo{scroll-margin-top:5rem;}
   body.nav-open{position:fixed;width:100%;overflow:hidden;left:0;right:0;}
   @media(max-width:1023px){
     .primary-nav{position:fixed;inset:0 0 auto auto;width:min(86vw,340px);height:100vh;height:100dvh;max-width:100%;z-index:250;overflow-y:auto;overscroll-behavior:contain;padding:calc(env(safe-area-inset-top,0px) + 5.6rem) 1.65rem calc(env(safe-area-inset-bottom,0px) + 2rem);background:var(--ink-soft);}
@@ -551,11 +553,11 @@
     .primary-nav a{line-height:1.5;}
   }
   @media(max-width:760px){.gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));}.about-media img{height:310px;}.hero{min-height:min(780px,100svh);}}
-  @media(max-width:520px){.gallery-grid{gap:.5rem;}.gallery-grid .gallery-item:nth-child(n){grid-column:auto;aspect-ratio:4/3;}.gallery-grid .gallery-item img{min-height:0;}.gallery-grid .gallery-cap{padding:.65rem .55rem;font-size:.72rem;}.demo-form-fields{grid-template-columns:1fr;gap:0;}.demo-form{padding:1.1rem;}.about-media img{height:260px;}}
+  @media(max-width:520px){.gallery-grid{gap:.5rem;}.gallery-grid .gallery-item:nth-child(n){grid-column:auto;aspect-ratio:4/3;}.gallery-grid .gallery-item img{min-height:0;}.gallery-grid .gallery-cap{padding:.65rem .55rem;font-size:.72rem;}.demo-form-fields{grid-template-columns:1fr;gap:0;}.demo-form{padding:1.1rem;}.demo-form textarea{min-height:235px;}.about-media img{height:260px;}}
 </style>
 </head>
 <body>
-<div class="demo-banner" role="note"><strong>BLACK BARBER · BETA</strong> · Web de demostración, datos ficticios y consultas simuladas</div>
+<div class="demo-banner" role="note"><strong>BLACK BARBER · BETA</strong> · Web ilustrativa · Consultas a la agencia con envío manual</div>
 
 <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
@@ -611,7 +613,7 @@
         <div class="hero-actions">
           <a class="btn btn-primary" href="#contacto-demo" data-demo-contact>
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.48 1.34 5L2 22l5.2-1.36a9.94 9.94 0 0 0 4.84 1.23h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2zm0 18.2h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.1.81.83-3.02-.2-.31a8.22 8.22 0 0 1-1.26-4.4c0-4.55 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.41a8.19 8.19 0 0 1 2.41 5.83c0 4.55-3.7 8.24-8.27 8.24zm4.52-6.17c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.44.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.89 2.41 1.02 2.58.12.17 1.75 2.68 4.25 3.75.59.26 1.06.41 1.42.53.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.16-.48-.28z"/></svg>
-            Reservar por WhatsApp
+            Consultar por WhatsApp
           </a>
           <a class="btn btn-ghost" href="#servicios">Ver servicios y precios</a>
         </div>
@@ -833,11 +835,11 @@
     <div class="wrap">
       <div class="cta-band-inner">
         <h2>Imaginá tu próxima web con esta experiencia</h2>
-        <p>Probá una consulta por WhatsApp como si fueras cliente. No se envían mensajes reales.</p>
+        <p>Probá la experiencia: se prepara un mensaje para la agencia y vos decidís si lo enviás. No se crean turnos.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="#contacto-demo" data-demo-contact>
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.48 1.34 5L2 22l5.2-1.36a9.94 9.94 0 0 0 4.84 1.23h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2zm0 18.2h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.1.81.83-3.02-.2-.31a8.22 8.22 0 0 1-1.26-4.4c0-4.55 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.41a8.19 8.19 0 0 1 2.41 5.83c0 4.55-3.7 8.24-8.27 8.24zm4.52-6.17c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.44.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.89 2.41 1.02 2.58.12.17 1.75 2.68 4.25 3.75.59.26 1.06.41 1.42.53.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.16-.48-.28z"/></svg>
-            Simular contacto WhatsApp
+            Preparar consulta por WhatsApp
           </a>
         </div>
       </div>
@@ -1087,6 +1089,16 @@
   document.querySelectorAll('[data-demo-contact]').forEach(function(link){
     link.addEventListener('click',function(){window.setTimeout(function(){demoService.focus({preventScroll:true});},400);});
   });
+
+  /* Evitar que el acceso flotante tape el botón del formulario en iPhone. */
+  var contactSection=document.getElementById('contacto-demo');
+  var floatingContact=document.querySelector('.whatsapp-fab');
+  if('IntersectionObserver' in window && floatingContact){
+    var contactVisibility=new IntersectionObserver(function(entries){
+      floatingContact.classList.toggle('is-hidden',entries[0].isIntersecting);
+    },{threshold:0});
+    contactVisibility.observe(contactSection);
+  }
 
   /* Simulación de enlaces a perfiles sociales, sin cuentas reales */
   var socialDialog = document.getElementById('socialDialog');
