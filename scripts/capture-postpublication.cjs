@@ -25,8 +25,10 @@ async function main(){
        await page.evaluate(y=>window.scrollTo(0,y),y);
        await page.waitForTimeout(65);
      }
+     await page.locator('#galeria').scrollIntoViewIfNeeded();
+     await page.waitForFunction(() => [...document.querySelectorAll('.gallery-item img')].every(el => el.complete && el.naturalWidth > 0), null, {timeout:22000});
      await page.evaluate(()=>window.scrollTo(0,0));
-     await page.waitForTimeout(250);
+     await page.waitForTimeout(350);
      const metrics=await page.evaluate(()=>({viewport:document.documentElement.clientWidth,doc:document.documentElement.scrollWidth,scrollHeight:document.documentElement.scrollHeight}));
      if(metrics.doc>metrics.viewport+1)throw Error('overflow '+v.name+':'+JSON.stringify(metrics));
      if(errors.length)throw Error('JS '+v.name+':'+errors.join('|'));
