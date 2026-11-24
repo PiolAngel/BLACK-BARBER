@@ -14,6 +14,7 @@ concurrency:
 jobs:
   browser:
     runs-on: ubuntu-24.04
+    container: mcr.microsoft.com/playwright:v1.58.2-noble
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -21,13 +22,8 @@ jobs:
           persist-credentials: false
       - name: Validar sintaxis del control de publicación
         run: python3 -m py_compile .github/scripts/verify-release.py
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
-        with:
-          node-version: '22'
       - name: Instalar herramientas de prueba
         run: npm install --no-save @playwright/test@1.58.2
-      - name: Instalar Chromium
-        run: npx playwright install --with-deps chromium
       - name: Pruebas de escritorio y móvil
         run: npx playwright test tests/demo.spec.cjs --reporter=line
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
