@@ -17,8 +17,7 @@
   3. Los colores y fuentes están centralizados como variables CSS al principio
      de <style> (sección ":root"), así que se puede re-marcar todo el sitio
      para otro rubro cambiando sólo esas variables.
-  4. El número de WhatsApp aparece en varios lugares — buscá "595981123456"
-     y reemplazalo por el número real del negocio en TODOS los lugares.
+  4. El número de destino se cambia en DEMO_WHATSAPP_NUMBER, dentro del script.
 ============================================================================ -->
 
 <title>BLACK BARBER | Demo de barbería premium en Paraguay</title>
@@ -526,6 +525,33 @@
     .about-fact b{ font-size:1.6rem; }
     .hero-stats{ gap:1.6rem; flex-wrap:wrap; }
   }
+
+  /* Fotografía: composición compacta y equilibrada */
+  .gallery-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(.55rem,1.6vw,1rem);}
+  .gallery-grid .gallery-item,.gallery-grid .gallery-item:nth-child(n){grid-column:auto;grid-row:auto;min-width:0;aspect-ratio:4/3;}
+  .gallery-grid .gallery-item img{width:100%;height:100%;min-height:0;object-fit:cover;filter:grayscale(28%);}
+  .gallery-grid .gallery-cap{opacity:1;transform:none;font-size:.78rem;background:linear-gradient(0deg,rgba(14,12,10,.88),transparent);}
+  .about-media img{height:clamp(260px,34vw,440px);}
+  .hero{min-height:min(800px,95svh);}
+  .demo-form{max-width:680px;}
+  .demo-form-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;}
+  .demo-form input{display:block;width:100%;min-width:0;background:var(--ink-soft);color:var(--bone);border:1px solid var(--line-strong);border-radius:3px;padding:.8rem;font:inherit;margin-bottom:1.35rem;}
+  .demo-form textarea{min-height:155px;line-height:1.6;resize:vertical;}
+  .field-optional,.demo-hint{color:var(--bone-faint);font-size:.83rem;font-weight:400;}
+  .demo-form .demo-hint{margin:.5rem 0 0;text-align:left;}
+  .demo-form input:focus-visible,.demo-form select:focus-visible,.demo-form textarea:focus-visible{outline:2px solid var(--brass-soft);outline-offset:1px;}
+  /* El panel está montado en body, fuera del header con backdrop-filter. */
+  .nav-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:249;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .25s;}
+  .nav-backdrop.is-open{visibility:visible;opacity:1;pointer-events:auto;}
+  .nav-close{display:none;}
+  body.nav-open{position:fixed;width:100%;overflow:hidden;left:0;right:0;}
+  @media(max-width:1023px){
+    .primary-nav{position:fixed;inset:0 0 auto auto;width:min(86vw,340px);height:100vh;height:100dvh;max-width:100%;z-index:250;overflow-y:auto;overscroll-behavior:contain;padding:calc(env(safe-area-inset-top,0px) + 5.6rem) 1.65rem calc(env(safe-area-inset-bottom,0px) + 2rem);background:var(--ink-soft);}
+    .primary-nav .nav-close{display:flex;position:absolute;right:1.2rem;top:calc(env(safe-area-inset-top,0px) + 1.2rem);width:44px;height:44px;align-items:center;justify-content:center;color:var(--bone);font-size:1.8rem;background:transparent;border:1px solid var(--line-strong);}
+    .primary-nav a{line-height:1.5;}
+  }
+  @media(max-width:760px){.gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));}.about-media img{height:310px;}.hero{min-height:min(780px,100svh);}}
+  @media(max-width:520px){.gallery-grid{gap:.5rem;}.gallery-grid .gallery-item:nth-child(n){grid-column:auto;aspect-ratio:4/3;}.gallery-grid .gallery-item img{min-height:0;}.gallery-grid .gallery-cap{padding:.65rem .55rem;font-size:.72rem;}.demo-form-fields{grid-template-columns:1fr;gap:0;}.demo-form{padding:1.1rem;}.about-media img{height:260px;}}
 </style>
 </head>
 <body>
@@ -572,7 +598,7 @@
   <section class="hero" id="inicio">
     <div class="hero-media" aria-hidden="true">
       <!-- EDITAR: reemplazar por foto real del local o de un corte terminado -->
-      <img src="https://images.unsplash.com/photo-1672642150228-3fcd5826ec26?auto=format&fit=crop&w=1800&q=80">
+      <img src="https://images.unsplash.com/photo-1672642150228-3fcd5826ec26?auto=format&fit=crop&w=1500&q=76">
     </div>
     <div class="wrap">
       <div class="hero-content">
@@ -606,7 +632,7 @@
     <div class="wrap about-grid">
       <div class="about-media reveal">
         <!-- EDITAR: reemplazar por foto real del equipo o del local -->
-        <img src="https://images.unsplash.com/photo-1582771498000-8ad44e6c84db?auto=format&fit=crop&w=1000&q=80" alt="Fotografía ilustrativa de un barbero realizando un corte">
+        <img src="https://images.unsplash.com/photo-1582771498000-8ad44e6c84db?auto=format&fit=crop&w=780&q=74" alt="Fotografía ilustrativa de un barbero realizando un corte">
         <div class="about-fact">
           <b>2019</b>
           <span>Año ficticio de apertura del concepto</span>
@@ -723,30 +749,12 @@
       </div>
 
       <div class="gallery-grid reveal">
-        <div class="gallery-item" role="button" tabindex="0" aria-label="Ampliar imagen de galería">
-          <img src="https://images.unsplash.com/photo-1672642150228-3fcd5826ec26?auto=format&fit=crop&w=1000&q=70" alt="Corte de precisión en proceso">
-          <div class="gallery-cap">Corte de precisión</div>
-        </div>
-        <div class="gallery-item" role="button" tabindex="0" aria-label="Ampliar imagen de galería">
-          <img src="https://images.unsplash.com/photo-1582771498000-8ad44e6c84db?auto=format&fit=crop&w=800&q=70" alt="Cliente durante un corte clásico">
-          <div class="gallery-cap">Corte clásico</div>
-        </div>
-        <div class="gallery-item" role="button" tabindex="0" aria-label="Ampliar imagen de galería">
-          <img src="https://images.unsplash.com/photo-1672642150228-3fcd5826ec26?auto=format&fit=crop&w=900&q=75" alt="Herramientas de barbería sobre mesa de madera">
-          <div class="gallery-cap">Nuestras herramientas</div>
-        </div>
-        <div class="gallery-item" role="button" tabindex="0" aria-label="Ampliar imagen de galería">
-          <img src="https://images.unsplash.com/photo-1672642150228-3fcd5826ec26?auto=format&fit=crop&w=900&q=75" alt="Interior del local">
-          <div class="gallery-cap">El local</div>
-        </div>
-        <div class="gallery-item" role="button" tabindex="0" aria-label="Ampliar imagen de galería">
-          <img src="https://images.unsplash.com/photo-1582771498000-8ad44e6c84db?auto=format&fit=crop&w=800&q=70&flip=h" alt="Detalle de barba perfilada">
-          <div class="gallery-cap">Barba perfilada</div>
-        </div>
-        <div class="gallery-item" role="button" tabindex="0" aria-label="Ampliar imagen de galería">
-          <img src="https://images.unsplash.com/photo-1672642150228-3fcd5826ec26?auto=format&fit=crop&w=1200&q=70&flip=h" alt="Sesión de afeitado tradicional">
-          <div class="gallery-cap">Afeitado tradicional</div>
-        </div>
+        <div class="gallery-item" role="button" tabindex="0" aria-label="Ampliar: Degradado de precisión"><img src="https://images.unsplash.com/photo-1653875700322-cf550d9a52ff?auto=format&fit=crop&w=680&q=73" alt="Detalle de corte de pelo profesional" width="680" height="510" loading="lazy" decoding="async"><div class="gallery-cap">Degradado de precisión</div></div>
+        <div class="gallery-item" role="button" tabindex="0" aria-label="Ampliar: Acabado profesional"><img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&w=680&q=73" alt="Barbero peinando a un cliente" width="680" height="510" loading="lazy" decoding="async"><div class="gallery-cap">Acabado profesional</div></div>
+        <div class="gallery-item" role="button" tabindex="0" aria-label="Ampliar: Corte urbano"><img src="https://images.unsplash.com/photo-1705976063063-af7d6b9a4083?auto=format&fit=crop&w=680&q=73" alt="Corte moderno realizado por un barbero" width="680" height="510" loading="lazy" decoding="async"><div class="gallery-cap">Corte urbano</div></div>
+        <div class="gallery-item" role="button" tabindex="0" aria-label="Ampliar: Perfilado de barba"><img src="https://images.unsplash.com/photo-1761148438883-e34e0289a214?auto=format&fit=crop&w=680&q=73" alt="Afeitado tradicional con navaja" width="680" height="510" loading="lazy" decoding="async"><div class="gallery-cap">Perfilado de barba</div></div>
+        <div class="gallery-item" role="button" tabindex="0" aria-label="Ampliar: Técnica a tijera"><img src="https://images.unsplash.com/photo-1768363446104-b8a0c1716600?auto=format&fit=crop&w=680&q=73" alt="Barbero recortando el cabello de un cliente" width="680" height="510" loading="lazy" decoding="async"><div class="gallery-cap">Técnica a tijera</div></div>
+        <div class="gallery-item" role="button" tabindex="0" aria-label="Ampliar: Afeitado clásico"><img src="https://images.unsplash.com/photo-1533808232502-bee53575c3af?auto=format&fit=crop&w=680&q=73" alt="Trabajo de barba y afeitado" width="680" height="510" loading="lazy" decoding="async"><div class="gallery-cap">Afeitado clásico</div></div>
       </div>
     </div>
   </section>
@@ -820,7 +828,7 @@
   ========================================================= -->
   <section class="cta-band">
     <div class="hero-media" aria-hidden="true">
-      <img src="https://images.unsplash.com/photo-1582771498000-8ad44e6c84db?auto=format&fit=crop&w=1800&q=75" alt="">
+      <img src="https://images.unsplash.com/photo-1759134248487-e8baaf31e33e?auto=format&fit=crop&w=1200&q=70" alt="">
     </div>
     <div class="wrap">
       <div class="cta-band-inner">
@@ -840,16 +848,21 @@
 
 <section class="demo-contact" id="contacto-demo" aria-labelledby="contactHeading">
   <div class="wrap">
-    <h2 id="contactHeading">Reserva por WhatsApp</h2>
-    <p>Probá cómo funciona la consulta de un servicio. Esta BETA no envía mensajes ni guarda datos personales.</p>
+    <h2 id="contactHeading">Consultá por WhatsApp</h2>
+    <p>Elegí un servicio y personalizá el mensaje. Se abrirá WhatsApp con el número autorizado de la agencia. El envío es manual: no se generan turnos ni se guardan datos en esta demo.</p>
     <form class="demo-form" id="demoBooking">
       <label for="demoService">Elegí un servicio</label>
       <select id="demoService">
         <option>Corte clásico</option><option>Experiencia BLACK</option><option>Corte + barba</option><option>Afeitado tradicional</option><option>Diseño de barba</option><option>Coloración</option><option>Corte niño</option>
       </select>
-      <label for="demoMessage">Mensaje de WhatsApp (vista previa)</label>
-      <textarea id="demoMessage" readonly></textarea>
-      <button type="submit" class="btn btn-primary">Simular envío de consulta</button>
+      <div class="demo-form-fields">
+        <div><label for="demoName">Tu nombre <span class="field-optional">(opcional)</span></label><input id="demoName" type="text" autocomplete="name" maxlength="80" placeholder="¿Cómo te llamás?"></div>
+        <div><label for="demoWhen">Día u horario preferido <span class="field-optional">(opcional)</span></label><input id="demoWhen" type="text" maxlength="100" placeholder="Ej.: viernes a la tarde"></div>
+      </div>
+      <label for="demoMessage">Mensaje para WhatsApp <span class="field-optional">(editable)</span></label>
+      <textarea id="demoMessage" rows="5" maxlength="1500" spellcheck="true"></textarea>
+      <p class="demo-hint">Revisá o cambiá el texto antes de continuar.</p>
+      <button type="submit" class="btn btn-primary">ENVIAR CONSULTA POR WHATSAPP</button>
       <p id="demoStatus" class="demo-status" role="status" aria-live="polite"></p>
     </form>
   </div>
@@ -941,21 +954,56 @@
   onScroll();
   window.addEventListener('scroll', onScroll, { passive:true });
 
-  /* Menú móvil */
+  /* Menú móvil aislado de los ancestros con backdrop-filter/scroll de Safari. */
   var nav = document.getElementById('primaryNav');
   var toggle = document.getElementById('navToggle');
-  toggle.addEventListener('click', function(){
-    var isOpen = nav.classList.toggle('is-open');
-    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    toggle.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
-  });
-  document.addEventListener('click',function(e){if(nav.classList.contains('is-open')&&!nav.contains(e.target)&&!toggle.contains(e.target)){nav.classList.remove('is-open');toggle.setAttribute('aria-expanded','false');}});
-  nav.querySelectorAll('a').forEach(function(link){
-    link.addEventListener('click', function(){
-      nav.classList.remove('is-open');
-      toggle.setAttribute('aria-expanded', 'false');
-    });
-  });
+  var navAnchor = document.createComment('Menú de escritorio');
+  nav.parentNode.insertBefore(navAnchor,nav);
+  var navMQ = window.matchMedia('(max-width: 1023px)');
+  var backdrop = document.createElement('div');
+  backdrop.className = 'nav-backdrop';
+  backdrop.setAttribute('aria-hidden','true');
+  document.body.appendChild(backdrop);
+  var navClose = document.createElement('button');
+  navClose.id = 'navClose';
+  navClose.className = 'nav-close';
+  navClose.type = 'button';
+  navClose.textContent = '×';
+  navClose.setAttribute('aria-label','Cerrar menú');
+  nav.insertBefore(navClose,nav.firstChild);
+  var savedScrollY = 0;
+  function closeNav(){
+    if (!nav.classList.contains('is-open'))return;
+    nav.classList.remove('is-open');
+    backdrop.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded','false');
+    toggle.setAttribute('aria-label','Abrir menú');
+    document.body.classList.remove('nav-open');
+    document.body.style.top='';
+    window.scrollTo(0,savedScrollY);
+  }
+  function openNav(){
+    if(!navMQ.matches)return;
+    savedScrollY=window.scrollY;
+    document.body.style.top='-'+savedScrollY+'px';
+    document.body.classList.add('nav-open');
+    nav.classList.add('is-open');
+    backdrop.classList.add('is-open');
+    toggle.setAttribute('aria-expanded','true');
+    toggle.setAttribute('aria-label','Cerrar menú');
+    navClose.focus({preventScroll:true});
+  }
+  function mountNav(){
+    closeNav();
+    if(navMQ.matches)document.body.appendChild(nav);
+    else navAnchor.parentNode.insertBefore(nav,navAnchor.nextSibling);
+  }
+  mountNav();
+  if(navMQ.addEventListener)navMQ.addEventListener('change',mountNav);else navMQ.addListener(mountNav);
+  toggle.addEventListener('click',function(){if(nav.classList.contains('is-open'))closeNav();else openNav();});
+  navClose.addEventListener('click',function(){closeNav();toggle.focus({preventScroll:true});});
+  backdrop.addEventListener('click',closeNav);
+  nav.querySelectorAll('a').forEach(function(link){link.addEventListener('click',closeNav);});
 
   /* Hero: activa la animación de entrada una vez cargado */
   var hero = document.querySelector('.hero');
@@ -1002,25 +1050,42 @@
   }
   if (slides.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) resetTimer();
 
-  /* Reserva interactiva de demostración */
-  var demoService = document.getElementById('demoService');
-  var demoMessage = document.getElementById('demoMessage');
-  var demoStatus = document.getElementById('demoStatus');
+  /* Destinatario de demo: único dato a cambiar al adaptar a otros clientes. */
+  var DEMO_WHATSAPP_NUMBER='595981951940';
+  var demoService=document.getElementById('demoService');
+  var demoName=document.getElementById('demoName');
+  var demoWhen=document.getElementById('demoWhen');
+  var demoMessage=document.getElementById('demoMessage');
+  var demoStatus=document.getElementById('demoStatus');
+  var editedMessage=false,previousService=demoService.value;
+  function defaultMessage(){
+    return 'Hola, quiero consultar sobre BLACK BARBER (sitio demostrativo).'+
+      '\nServicio: '+demoService.value+
+      (demoName.value.trim()?'\nNombre: '+demoName.value.trim():'')+
+      (demoWhen.value.trim()?'\nHorario preferido: '+demoWhen.value.trim():'')+
+      '\n¿Podrían darme más información? Entiendo que esto es una DEMO y no confirma turnos.';
+  }
   function updateDemoMessage(){
-    demoMessage.value = 'Hola BLACK BARBER, quiero consultar disponibilidad para ' + demoService.value + '. ¿Qué horarios tienen?';
-    demoStatus.textContent = '';
+    if(!editedMessage)demoMessage.value=defaultMessage();
+    else if(previousService!==demoService.value)demoMessage.value=demoMessage.value.replace(previousService,demoService.value);
+    previousService=demoService.value;
+    demoStatus.textContent='';
   }
   demoService.addEventListener('change',updateDemoMessage);
+  demoName.addEventListener('input',updateDemoMessage);
+  demoWhen.addEventListener('input',updateDemoMessage);
+  demoMessage.addEventListener('input',function(){editedMessage=true;demoStatus.textContent='';});
   document.getElementById('demoBooking').addEventListener('submit',function(e){
     e.preventDefault();
-    demoStatus.textContent='Consulta simulada correctamente. No se envió ningún mensaje.';
-    demoMessage.focus();
+    var msg=demoMessage.value.trim();
+    if(!msg){demoStatus.textContent='Escribí tu mensaje para continuar.';demoMessage.focus();return;}
+    var url='https://wa.me/'+DEMO_WHATSAPP_NUMBER+'?text='+encodeURIComponent(msg);
+    demoStatus.textContent='Se abrirá WhatsApp con el texto preparado. Vos decidís si lo enviás.';
+    window.open(url,'_blank','noopener,noreferrer');
   });
   updateDemoMessage();
   document.querySelectorAll('[data-demo-contact]').forEach(function(link){
-    link.addEventListener('click',function(){
-      window.setTimeout(function(){demoService.focus({preventScroll:true});},400);
-    });
+    link.addEventListener('click',function(){window.setTimeout(function(){demoService.focus({preventScroll:true});},400);});
   });
 
   /* Simulación de enlaces a perfiles sociales, sin cuentas reales */
@@ -1073,7 +1138,7 @@
   function closeLightbox(){ lightbox.classList.remove('is-open');lightbox.setAttribute('aria-hidden','true'); lightboxImg.src = '';if(lastFocused)lastFocused.focus(); }
   lightboxClose.addEventListener('click', closeLightbox);
   lightbox.addEventListener('click', function(e){ if (e.target === lightbox) closeLightbox(); });
-  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') {closeSocial();closeLightbox();nav.classList.remove('is-open');toggle.setAttribute('aria-expanded','false');} if (e.key==='Tab' && socialDialog.classList.contains('is-open')){e.preventDefault();socialClose.focus();} else if (e.key==='Tab' && lightbox.classList.contains('is-open')){e.preventDefault();lightboxClose.focus();} });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') {closeSocial();closeLightbox();closeNav();} if (e.key==='Tab' && socialDialog.classList.contains('is-open')){e.preventDefault();socialClose.focus();} else if (e.key==='Tab' && lightbox.classList.contains('is-open')){e.preventDefault();lightboxClose.focus();} });
 
 })();
 </script>
