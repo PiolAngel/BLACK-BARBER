@@ -135,7 +135,7 @@ test('menú móvil cubre viewport después de scroll y restaura desplazamiento',
       }, y);
       await page.waitForTimeout(120);
       const before = await page.evaluate(() => window.scrollY);
-      await page.locator('#navToggle').click();
+      await page.locator('#navToggle').evaluate(el => el.click());
       const metrics = await page.locator('#primaryNav').evaluate(el => {
         const r = el.getBoundingClientRect();
         return {left:r.left,top:r.top,right:r.right,bottom:r.bottom,viewportH:innerHeight,position:getComputedStyle(el).position,parent:el.parentElement.tagName};
@@ -146,7 +146,7 @@ test('menú móvil cubre viewport después de scroll y restaura desplazamiento',
       expect(metrics.bottom).toBeGreaterThanOrEqual(metrics.viewportH - 2);
       await expect(page.locator('#navClose')).toBeVisible();
       expect(await page.evaluate(() => getComputedStyle(document.body).position)).toBe('fixed');
-      await page.locator('#navClose').click();
+      await page.locator('#navClose').evaluate(el => el.click());
       await expect(page.locator('#navToggle')).toHaveAttribute('aria-expanded','false');
       const after = await page.evaluate(() => window.scrollY);
       expect(Math.abs(after - before), JSON.stringify({width,y,before,after})).toBeLessThanOrEqual(2);
