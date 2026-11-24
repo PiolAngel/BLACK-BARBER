@@ -14,6 +14,5 @@ Licencia general: https://unsplash.com/license (uso comercial gratuito, sujeto a
 | Galería: barba | photo-1761148438883-e34e0289a214 | https://unsplash.com/photos/barber-shaves-mans-beard-with-straight-razor-1Ig9rw7aC5g |
 | Galería: tijera | photo-1768363446104-b8a0c1716600 | https://unsplash.com/photos/a-barber-cuts-a-clients-hair-in-a-salon-cAN-eg8-Q-Q |
 | Galería: afeitado | photo-1533808232502-bee53575c3af | https://unsplash.com/photos/man-shaving-lying-man-FWgYghZrVqU |
-| Cierre / llamada a la acción | photo-1759134248487-e8baaf31e33e | https://unsplash.com/photos/barber-shop-interior-with-clients-receiving-haircuts-_EjaOZ0D8xY |
 
 **Adaptación comercial:** sustituir todas estas fotografías por material propio autorizado de cada cliente, con permisos de imagen y uso apropiados. No presentar las fotografías ilustrativas como resultados reales de la barbería.
