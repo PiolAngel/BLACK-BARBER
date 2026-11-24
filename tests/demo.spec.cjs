@@ -8,14 +8,25 @@ test('la página carga sin errores de JavaScript', async ({ page }) => {
   expect(errors).toEqual([]);
 });
 
-test('reserva demostrativa: previsualiza sin enviar mensajes', async ({ page }) => {
+test('consulta WhatsApp: servicio, edición y destinatario autorizado', async ({ page }) => {
   await page.goto('/#contacto-demo');
   const select = page.locator('#demoService');
   await expect(select.locator('option')).toHaveCount(7);
   await select.selectOption({ label: 'Corte + barba' });
+  await page.locator('#demoName').fill('Martín');
+  await page.locator('#demoWhen').fill('Viernes a la tarde');
   await expect(page.locator('#demoMessage')).toHaveValue(/Corte \+ barba/);
+  await expect(page.locator('#demoMessage')).toHaveValue(/Martín/);
+  await page.locator('#demoMessage').fill('Hola BLACK BARBER, consulto por Corte + barba. ¿Tienen hora el viernes?');
+  await page.evaluate(() => {window.open = (url) => {window.__waCaptured = url;return null;};});
   await page.locator('#demoBooking button[type="submit"]').click();
-  await expect(page.locator('#demoStatus')).not.toBeEmpty();
+  const url = await page.evaluate(() => window.__waCaptured);
+  const parsed = new URL(url);
+  expect(parsed.origin).toBe('https://wa.me');
+  expect(parsed.pathname).toBe('/595981951940');
+  expect(parsed.searchParams.get('text')).toBe('Hola BLACK BARBER, consulto por Corte + barba. ¿Tienen hora el viernes?');
+  await expect(page.locator('#demoMessage')).toHaveValue(/¿Tienen hora el viernes/);
+  await expect(page.locator('#demoStatus')).toContainText('envío');
 });
 
 test('las redes muestran información de demostración', async ({ page }) => {
@@ -32,7 +43,7 @@ test('el menú móvil puede abrirse y cerrarse', async ({ page }) => {
   const toggle = page.locator('#navToggle');
   await toggle.click();
   await expect(toggle).toHaveAttribute('aria-expanded', 'true');
-  await toggle.click();
+  await page.locator('#navClose').click();
   await expect(toggle).toHaveAttribute('aria-expanded', 'false');
 });
 
@@ -104,8 +115,62 @@ test('no hay scroll horizontal en tamaños móviles y tablet, con menú cerrado 
     if (width <= 1023) {
       await page.locator('#navToggle').click();
       await inspect('open');
-      await page.locator('#navToggle').click();
+      await page.locator('#navClose').click();
       await inspect('closed-again');
+    }
+  }
+});
+
+test('menú móvil cubre viewport después de scroll y restaura desplazamiento', async ({ page }) => {
+  for (const width of [390, 820]) {
+    await page.setViewportSize({ width, height: 750 });
+    await page.goto('/');
+    for (const y of [450, 1400, 3200]) {
+      await page.evaluate(y => window.scrollTo(0, y), y);
+      await page.waitForTimeout(450);
+      const before = await page.evaluate(() => window.scrollY);
+      await page.locator('#navToggle').click();
+      const metrics = await page.locator('#primaryNav').evaluate(el => {
+        const r = el.getBoundingClientRect();
+        return {left:r.left,top:r.top,right:r.right,bottom:r.bottom,viewportH:innerHeight,position:getComputedStyle(el).position,parent:el.parentElement.tagName};
+      });
+      expect(metrics.parent).toBe('BODY');
+      expect(metrics.position).toBe('fixed');
+      expect(metrics.top).toBe(0);
+      expect(metrics.bottom).toBeGreaterThanOrEqual(metrics.viewportH - 2);
+      await expect(page.locator('#navClose')).toBeVisible();
+      expect(await page.evaluate(() => getComputedStyle(document.body).position)).toBe('fixed');
+      await page.locator('#navClose').click();
+      await expect(page.locator('#navToggle')).toHaveAttribute('aria-expanded','false');
+      expect(Math.abs(await page.evaluate(() => window.scrollY) - before)).toBeLessThanOrEqual(2);
+    }
+  }
+});
+
+test('galería muestra seis fotografías distintas, accesibles y cargadas', async ({ page }) => {
+  await page.goto('/');
+  const images=page.locator('.gallery-item img');
+  await expect(images).toHaveCount(6);
+  const sources=await images.evaluateAll(nodes => nodes.map(n => n.src.split('?')[0]));
+  expect(new Set(sources).size).toBe(6);
+  for (const img of await images.all()) {
+    await img.scrollIntoViewIfNeeded();
+    await expect.poll(async () => img.evaluate(el => el.complete && el.naturalWidth > 0), {timeout:15000}).toBe(true);
+    expect(await img.getAttribute('alt')).toBeTruthy();
+  }
+  const dimensions=await page.locator('.gallery-grid').evaluate(el=>({width:el.scrollWidth,client:el.clientWidth}));
+  expect(dimensions.width).toBeLessThanOrEqual(dimensions.client+1);
+});
+
+test('galería mantiene dimensiones compactas en teléfono y escritorio', async ({page}) => {
+  for (const width of [390, 820, 1440]) {
+    await page.setViewportSize({width,height:850});
+    await page.goto('/');
+    await page.locator('#galeria').scrollIntoViewIfNeeded();
+    const sizes=await page.locator('.gallery-item').evaluateAll(nodes=>nodes.map(n=>({w:n.getBoundingClientRect().width,h:n.getBoundingClientRect().height})));
+    for(const size of sizes) {
+      expect(size.h,JSON.stringify({width,size})).toBeLessThanOrEqual(width===1440?400:width===820?320:220);
+      expect(size.w).toBeGreaterThan(100);
     }
   }
 });
